@@ -1,5 +1,4 @@
 @extends('layouts.public')
-@section('title', 'Home')
 @section('content')
 <main class="main">
     <div class="main-header">
