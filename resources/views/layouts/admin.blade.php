@@ -10,7 +10,13 @@
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-  <title>@yield('title') - {{ config('app.name') }}</title>
+  <title>
+    @if(View::hasSection('title'))
+      @yield('title') - {{ ucwords(str_replace('_', ' ', config('app.name'))) }}
+    @else
+      {{ ucwords(str_replace('_', ' ', config('app.name'))) }}
+    @endif
+  </title>
 </head>
 
 <body>
@@ -25,27 +31,27 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a href="#" class="nav-link active">Home</a>
+            <a href="{{ url('admin') }}" class="nav-link active">Home</a>
           </li>
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navBlog" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
             <div class="dropdown-menu" aria-labelledby="navBlog">
-              <a href="" class="dropdown-item">Post</a>
-              <a href="" class="dropdown-item">Tag</a>
+              <a href="{{ url('admin/blog/post') }}" class="dropdown-item">Post</a>
+              <a href="{{ url('admin/blog/tag') }}" class="dropdown-item">Tag</a>
             </div>
           </li>
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navProject" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Project</a>
             <div class="dropdown-menu" aria-labelledby="navProject">
-              <a href="" class="dropdown-item">Post</a>
-              <a href="" class="dropdown-item">Tag</a>
+              <a href="{{ url('admin/project/post') }}" class="dropdown-item">Post</a>
+              <a href="{{ url('admin/project/tag') }}" class="dropdown-item">Tag</a>
             </div>
           </li>
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navTemplate" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Template</a>
             <div class="dropdown-menu" aria-labelledby="navTemplate">
-              <a href="" class="dropdown-item">Post</a>
-              <a href="" class="dropdown-item">Tag</a>
+              <a href="{{ url('admin/template/post') }}" class="dropdown-item">Post</a>
+              <a href="{{ url('admin/template/tag') }}" class="dropdown-item">Tag</a>
             </div>
           </li>
         </ul>
@@ -61,16 +67,16 @@
     </div>
     <div class="nav-footer">
       <ul>
-        <li><a href="">Home</a></li>
-        <li><a href="">About</a></li>
-        <li><a href="">Contact</a></li>
-        <li><a href="">Terms of Service</a></li>
-        <li><a href="">Privacy Policy</a></li>
+        <li><a href="{{ url('admin') }}">Home</a></li>
+        <li><a href="{{ url('admin/about') }}">About</a></li>
+        <li><a href="{{ url('admin/contact') }}">Contact</a></li>
+        <li><a href="{{ url('admin/termsofservice') }}">Terms of Service</a></li>
+        <li><a href="{{ url('admin/privacypolicy') }}">Privacy Policy</a></li>
       </ul>
     </div>
   </div>
   <div class="bottom">
-    &copy; 2020 <a href="">Block Code</a> | Made with ❤️ by <a href="">Fauzi Galih Aji Saputro</a>
+    &copy; 2020 <a href="{{ url('admin/home') }}">Block Code</a> | Made with ❤️ by <a href="">Fauzi Galih Aji Saputro</a>
   </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
