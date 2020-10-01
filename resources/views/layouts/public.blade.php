@@ -10,7 +10,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon">
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-  <title>@yield('title') - {{ config('app.name') }}</title>
+  <title>
+    @if(View::hasSection('title'))
+      @yield('title') - {{ ucwords(str_replace('_', ' ', config('app.name'))) }}
+    @else
+      {{ ucwords(str_replace('_', ' ', config('app.name'))) }}
+    @endif
+  </title>
 </head>
 
 <body>
@@ -25,16 +31,16 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a href="#" class="nav-link active">Home</a>
+            <a href="{{ url('/') }}" class="nav-link active">Home</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Blog</a>
+            <a href="{{ url('blog') }}" class="nav-link">Blog</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Project</a>
+            <a href="{{ url('project') }}" class="nav-link">Project</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Template</a>
+            <a href="{{ url('template') }}" class="nav-link">Template</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0 search">
@@ -54,16 +60,16 @@
     </div>
     <div class="nav-footer">
       <ul>
-        <li><a href="">Home</a></li>
-        <li><a href="">About</a></li>
-        <li><a href="">Contact</a></li>
-        <li><a href="">Terms of Service</a></li>
-        <li><a href="">Privacy Policy</a></li>
+        <li><a href="{{ url('/') }}">Home</a></li>
+        <li><a href="{{ url('about') }}">About</a></li>
+        <li><a href="{{ url('contact') }}">Contact</a></li>
+        <li><a href="{{ url('termsofservice') }}">Terms of Service</a></li>
+        <li><a href="{{ url('privacypolicy') }}">Privacy Policy</a></li>
       </ul>
     </div>
   </div>
   <div class="bottom">
-    &copy; 2020 <a href="">Block Code</a> | Made with ❤️ by <a href="">Fauzi Galih Aji Saputro</a>
+    &copy; 2020 <a href="{{ url('/') }}">Block Code</a> | Made with ❤️ by <a href="">Fauzi Galih Aji Saputro</a>
   </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
