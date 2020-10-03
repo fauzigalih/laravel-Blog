@@ -15,6 +15,10 @@ class CreatePagesTable extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
+            $table->string('about');
+            $table->string('contact');
+            $table->string('termsofservice');
+            $table->string('privacypolice');
             $table->timestamps();
         });
     }
