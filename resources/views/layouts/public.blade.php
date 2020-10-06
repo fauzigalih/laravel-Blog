@@ -63,8 +63,8 @@
         <li><a href="{{ url('/') }}">Home</a></li>
         <li><a href="{{ url('about') }}">About</a></li>
         <li><a href="{{ url('contact') }}">Contact</a></li>
-        <li><a href="{{ url('termsofservice') }}">Terms of Service</a></li>
-        <li><a href="{{ url('privacypolicy') }}">Privacy Policy</a></li>
+        <li><a href="{{ url('terms-of-service') }}">Terms of Service</a></li>
+        <li><a href="{{ url('privacy-policy') }}">Privacy Policy</a></li>
       </ul>
     </div>
   </div>

@@ -70,8 +70,8 @@
         <li><a href="{{ url('admin') }}">Home</a></li>
         <li><a href="{{ url('admin/about') }}">About</a></li>
         <li><a href="{{ url('admin/contact') }}">Contact</a></li>
-        <li><a href="{{ url('admin/termsofservice') }}">Terms of Service</a></li>
-        <li><a href="{{ url('admin/privacypolicy') }}">Privacy Policy</a></li>
+        <li><a href="{{ url('admin/terms-of-service') }}">Terms of Service</a></li>
+        <li><a href="{{ url('admin/privacy-policy') }}">Privacy Policy</a></li>
       </ul>
     </div>
   </div>
