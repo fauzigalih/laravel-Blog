@@ -35,9 +35,9 @@ class PageController extends Controller
         return view('frontend.pages.termsofservice', compact('model'));
     }
     
-    public function privacypolice()
+    public function privacypolicy()
     {
         $model = Page::findOrFail(1);
-        return view('frontend.pages.privacypolice', compact('model'));
+        return view('frontend.pages.privacypolicy', compact('model'));
     }
 }
