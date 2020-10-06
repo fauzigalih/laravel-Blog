@@ -35,9 +35,9 @@ class AdminPageController extends Controller
         return view('backend.pages.termsofservice', compact('model'));
     }
     
-    public function privacypolice()
+    public function privacypolicy()
     {
         $model = Page::findOrFail(1);
-        return view('backend.pages.privacypolice', compact('model'));
+        return view('backend.pages.privacypolicy', compact('model'));
     }
 }
