@@ -7,4 +7,4 @@ for (var i = 0; i < btns.length; i++) {
     });
 }
 
-if(document.querySelector('main.main')) document.body.style.backgroundColor = 'white';
+if(document.querySelector('main.main') || document.querySelector('main.static')) document.body.style.backgroundColor = 'white';
