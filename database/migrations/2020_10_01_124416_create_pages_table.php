@@ -18,7 +18,7 @@ class CreatePagesTable extends Migration
             $table->string('about');
             $table->string('contact');
             $table->string('termsofservice');
-            $table->string('privacypolice');
+            $table->string('privacypolicy');
             $table->timestamps();
         });
     }
