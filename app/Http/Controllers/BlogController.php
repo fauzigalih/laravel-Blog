@@ -7,13 +7,6 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-
-    public function test()
-    {
-        $model = Blog::findOrFail(1);
-        return view('frontend.blog.test', compact('model'));
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -23,6 +16,12 @@ class BlogController extends Controller
     {
         $model = new Blog();
         return view('frontend.blog.index', compact('model'));
+    }
+
+    public function admin()
+    {
+        $model = new Blog();
+        return view('backend.blog.index', compact('model'));
     }
 
     /**
@@ -55,8 +54,8 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        $model = Blog::find($blog->id);
-        return view('frontend.blog.test', compact('model'));
+        $model = Blog::findOrFail($blog->url);
+        return view('frontend.blog.article', compact('model'));
     }
 
     /**
