@@ -19,6 +19,7 @@ class CreateBlogsTable extends Migration
             $table->longText('article');
             $table->string('tag');
             $table->string('url');
+            $table->boolean('status');
             $table->timestamps();
         });
     }
