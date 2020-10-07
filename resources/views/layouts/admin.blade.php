@@ -33,25 +33,26 @@
           <li class="nav-item">
             <a href="{{ url('admin') }}" class="nav-link active">Home</a>
           </li>
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" id="navBlog" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
-            <div class="dropdown-menu" aria-labelledby="navBlog">
-              <a href="{{ url('admin/blog/post') }}" class="dropdown-item">Post</a>
-              <a href="{{ url('admin/blog/tag') }}" class="dropdown-item">Tag</a>
-            </div>
+          <li class="nav-item">
+            <a href="{{ url('admin/blog') }}" class="nav-link">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('admin/project') }}" class="nav-link">Project</a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('admin/template') }}" class="nav-link">Template</a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('admin/image') }}" class="nav-link">Image</a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('admin/tag') }}" class="nav-link">Tag</a>
           </li>
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" id="navProject" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Project</a>
-            <div class="dropdown-menu" aria-labelledby="navProject">
-              <a href="{{ url('admin/project/post') }}" class="dropdown-item">Post</a>
-              <a href="{{ url('admin/project/tag') }}" class="dropdown-item">Tag</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" id="navTemplate" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Template</a>
-            <div class="dropdown-menu" aria-labelledby="navTemplate">
-              <a href="{{ url('admin/template/post') }}" class="dropdown-item">Post</a>
-              <a href="{{ url('admin/template/tag') }}" class="dropdown-item">Tag</a>
+            <a href="#" class="nav-link dropdown-toggle" id="navMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Fauzi Galih</a>
+            <div class="dropdown-menu" aria-labelledby="navMenu">
+              <a href="{{ url('admin/profile') }}" class="dropdown-item">Profile</a>
+              <a href="{{ url('admin/logout') }}" class="dropdown-item">Logout</a>
             </div>
           </li>
         </ul>
