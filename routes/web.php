@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\AdminPageController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BlogController;
+use App\Http\Controllers\AdminPageController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\TagController;
 use App\Http\Controllers\TemplateController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ Route::get('admin/about', [AdminPageController::class, 'about']);
 Route::get('admin/contact', [AdminPageController::class, 'contact']);
 Route::get('admin/terms-of-service', [AdminPageController::class, 'termsofservice']);
 Route::get('admin/privacy-policy', [AdminPageController::class, 'privacypolicy']);
+Route::get('admin/profile', [AdminPageController::class, 'profile']);
+Route::get('admin/logout', [AdminPageController::class, 'logout']);
 
 // Guest Static Pages
 Route::get('/', [PageController::class, 'index']);
@@ -36,34 +39,50 @@ Route::get('privacy-policy', [PageController::class, 'privacypolicy']);
 // Blog
 Route::get('blog', [BlogController::class, 'index']);
 Route::get('admin/blog', [BlogController::class, 'admin']);
-Route::get('admin/blog/create', [BlogController::class, 'create']);
+Route::get('admin/blog/create', [BlogController::class, 'create'])->name('aww');
 Route::post('admin/blog', [BlogController::class, 'store']);
 Route::get('blog/{blog}', [BlogController::class, 'show']);
-Route::get('admin/blog/edit/{id}', [BlogController::class, 'edit']);
-Route::put('admin/blog/{id}', [BlogController::class, 'update']);
-Route::delete('admin/blog/{id}', [BlogController::class, 'delete']);
+Route::get('admin/blog/edit/{blog}', [BlogController::class, 'edit']);
+Route::put('admin/blog/{blog}', [BlogController::class, 'update']);
+Route::delete('admin/blog/{blog}', [BlogController::class, 'delete']);
 
 // Project
 Route::get('project', [ProjectController::class, 'index']);
 Route::get('admin/project', [ProjectController::class, 'admin']);
 Route::get('admin/project/create', [ProjectController::class, 'create']);
 Route::post('admin/project', [ProjectController::class, 'store']);
-Route::get('project/{id}', [ProjectController::class, 'show']);
-Route::get('admin/project/edit/{id}', [ProjectController::class, 'edit']);
-Route::put('admin/project/{id}', [ProjectController::class, 'update']);
-Route::delete('admin/project/{id}', [ProjectController::class, 'delete']);
+Route::get('project/{project}', [ProjectController::class, 'show']);
+Route::get('admin/project/edit/{project}', [ProjectController::class, 'edit']);
+Route::put('admin/project/{project}', [ProjectController::class, 'update']);
+Route::delete('admin/project/{project}', [ProjectController::class, 'delete']);
 
 // Template
 Route::get('template', [TemplateController::class, 'index']);
 Route::get('admin/template', [TemplateController::class, 'admin']);
 Route::get('admin/template/create', [TemplateController::class, 'create']);
 Route::post('admin/template', [TemplateController::class, 'store']);
-Route::get('template/{id}', [TemplateController::class, 'show']);
-Route::get('admin/template/edit/{id}', [TemplateController::class, 'edit']);
-Route::put('admin/template/{id}', [TemplateController::class, 'update']);
-Route::delete('admin/template/{id}', [TemplateController::class, 'delete']);
+Route::get('template/{template}', [TemplateController::class, 'show']);
+Route::get('admin/template/edit/{template}', [TemplateController::class, 'edit']);
+Route::put('admin/template/{template}', [TemplateController::class, 'update']);
+Route::delete('admin/template/{template}', [TemplateController::class, 'delete']);
 
-Route::get('test', [BlogController::class, 'test']);
+// Image
+Route::get('admin/image', [ImageController::class, 'index']);
+Route::get('admin/image/create', [ImageController::class, 'create']);
+Route::post('admin/image', [ImageController::class, 'store']);
+Route::get('admin/image/{image}', [ImageController::class, 'show']);
+Route::get('admin/image/edit/{image}', [ImageController::class, 'edit']);
+Route::put('admin/image/{image}', [ImageController::class, 'update']);
+Route::delete('admin/image/{image}', [ImageController::class, 'delete']);
+
+// Tag
+Route::get('admin/tag', [TagController::class, 'index']);
+Route::get('admin/tag/create', [TagController::class, 'create'])->name('tag.create');
+Route::post('admin/tag', [TagController::class, 'store'])->name('tag.store');
+Route::get('admin/tag/{tag}', [TagController::class, 'show'])->name('tag.show');
+Route::get('admin/tag/edit/{tag}', [TagController::class, 'edit'])->name('tag.edit');
+Route::put('admin/tag/{tag}', [TagController::class, 'update'])->name('tag.edit');
+Route::delete('admin/tag/{tag}', [TagController::class, 'delete']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
