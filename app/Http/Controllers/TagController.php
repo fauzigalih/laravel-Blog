@@ -14,7 +14,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $model = new Tag();
+        return view('backend.tag.index', compact('model'));
     }
 
     /**
@@ -24,7 +25,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.tag.create');
     }
 
     /**
@@ -35,7 +36,9 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Tag::validateData($request);
+        Tag::create($request->all());
+        return redirect('admin/tag')->with('success', 'Tag Berhasil Ditambahkan!');
     }
 
     /**
@@ -46,7 +49,8 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
+        $model = Tag::findOrFail($tag->id);
+        return view('backend.tag.view', compact('model'));
     }
 
     /**
@@ -57,7 +61,8 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        $model = Tag::findOrFail($tag->id);
+        return view('backend.tag.edit', compact('model'));
     }
 
     /**
