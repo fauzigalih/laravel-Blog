@@ -1,3 +1,8 @@
+@php
+    $arrAction = explode('\\', Route::currentRouteAction());
+    $arrController = explode('@', $arrAction[3]);
+    $controller = $arrController[0];
+@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -31,16 +36,16 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a href="{{ url('/') }}" class="nav-link active">Home</a>
+            <a href="{{ url('/') }}" class="nav-link @if ($controller === 'PageController') active @endif">Home</a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('blog') }}" class="nav-link">Blog</a>
+            <a href="{{ url('blog') }}" class="nav-link @if ($controller === 'BlogController') active @endif">Blog</a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('project') }}" class="nav-link">Project</a>
+            <a href="{{ url('project') }}" class="nav-link @if ($controller === 'ProjectController') active @endif">Project</a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('template') }}" class="nav-link">Template</a>
+            <a href="{{ url('template') }}" class="nav-link @if ($controller === 'TemplateController') active @endif">Template</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0 search">
@@ -56,7 +61,7 @@
 <footer>
   <div class="header">
     <div class="logo">
-      <span class="bg-dark">block</span><span class="bg-success">Code</span>
+      <a href="{{ url('/') }}"><span class="bg-dark">block</span><span class="bg-success">Code</span></a>
     </div>
     <div class="nav-footer">
       <ul>

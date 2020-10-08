@@ -1,3 +1,8 @@
+@php
+    $arrAction = explode('\\', Route::currentRouteAction());
+    $arrController = explode('@', $arrAction[3]);
+    $controller = $arrController[0];
+@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -22,7 +27,7 @@
 <body>
   <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-white fixed-top">
-      <a href="#" class="navbar-brand"><span class="bg-dark">block</span><span
+      <a href="{{ url('admin') }}" class="navbar-brand"><span class="bg-dark">block</span><span
           class="bg-success">Code</span></a>
       <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse"
         data-target="#navbarResponsive">
@@ -31,22 +36,22 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a href="{{ url('admin') }}" class="nav-link active">Home</a>
+            <a href="{{ url('admin') }}" class="nav-link @if ($controller === 'AdminPageController') active @endif">Home</a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('admin/blog') }}" class="nav-link">Blog</a>
+            <a href="{{ url('admin/blog') }}" class="nav-link @if ($controller === 'BlogController') active @endif">Blog</a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('admin/project') }}" class="nav-link">Project</a>
+            <a href="{{ url('admin/project') }}" class="nav-link @if ($controller === 'ProjectController') active @endif">Project</a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('admin/template') }}" class="nav-link">Template</a>
+            <a href="{{ url('admin/template') }}" class="nav-link @if ($controller === 'TemplateController') active @endif">Template</a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('admin/image') }}" class="nav-link">Image</a>
+            <a href="{{ url('admin/image') }}" class="nav-link @if ($controller === 'ImageController') active @endif">Image</a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('admin/tag') }}" class="nav-link">Tag</a>
+            <a href="{{ url('admin/tag') }}" class="nav-link @if ($controller === 'TagController') active @endif">Tag</a>
           </li>
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Fauzi Galih</a>
@@ -60,26 +65,27 @@
     </nav>
   </header>
   @yield('content')
+  <footer>
+    <div class="header">
+      <div class="logo">
+        <a href="{{ url('admin') }}"><span class="bg-dark">block</span><span class="bg-success">Code</span></a>
+      </div>
+      <div class="nav-footer">
+        <ul>
+          <li><a href="{{ url('admin') }}">Home</a></li>
+          <li><a href="{{ url('admin/about') }}">About</a></li>
+          <li><a href="{{ url('admin/contact') }}">Contact</a></li>
+          <li><a href="{{ url('admin/terms-of-service') }}">Terms of Service</a></li>
+          <li><a href="{{ url('admin/privacy-policy') }}">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      &copy; 2020 <a href="{{ url('admin/home') }}">Block Code</a> | Made with ❤️ by <a href="">Fauzi Galih Aji Saputro</a>
+    </div>
+  </footer>
 </body>
-<footer>
-  <div class="header">
-    <div class="logo">
-      <span class="bg-dark">block</span><span class="bg-success">Code</span>
-    </div>
-    <div class="nav-footer">
-      <ul>
-        <li><a href="{{ url('admin') }}">Home</a></li>
-        <li><a href="{{ url('admin/about') }}">About</a></li>
-        <li><a href="{{ url('admin/contact') }}">Contact</a></li>
-        <li><a href="{{ url('admin/terms-of-service') }}">Terms of Service</a></li>
-        <li><a href="{{ url('admin/privacy-policy') }}">Privacy Policy</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="bottom">
-    &copy; 2020 <a href="{{ url('admin/home') }}">Block Code</a> | Made with ❤️ by <a href="">Fauzi Galih Aji Saputro</a>
-  </div>
-</footer>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
   integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
