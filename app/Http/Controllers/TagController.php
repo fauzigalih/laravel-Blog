@@ -74,7 +74,10 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $model = Tag::findOrFail($tag->id);
+        $id = $model->id;
+        Tag::updateOrCreate(compact('id'), $request->all());
+        return redirect('admin/tag')->with('warning', 'Data Berhasil Diubah!');
     }
 
     /**
@@ -85,6 +88,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        Tag::destroy($tag->id);
+        return redirect('admin/tag')->with('danger', 'Data Berhasil Dihapus!');
     }
 }
