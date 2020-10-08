@@ -20,4 +20,5 @@
         @endif
     @endif>
     <button class="btn btn-success">Save</button>
+    <a href="{{ url()->previous() }}" class="btn btn-danger">Kembali</a>
 </form>
