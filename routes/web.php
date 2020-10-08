@@ -44,7 +44,7 @@ Route::post('admin/blog', [BlogController::class, 'store']);
 Route::get('blog/{blog}', [BlogController::class, 'show']);
 Route::get('admin/blog/edit/{blog}', [BlogController::class, 'edit']);
 Route::put('admin/blog/{blog}', [BlogController::class, 'update']);
-Route::delete('admin/blog/{blog}', [BlogController::class, 'delete']);
+Route::delete('admin/blog/{blog}', [BlogController::class, 'destroy']);
 
 // Project
 Route::get('project', [ProjectController::class, 'index']);
@@ -54,7 +54,7 @@ Route::post('admin/project', [ProjectController::class, 'store']);
 Route::get('project/{project}', [ProjectController::class, 'show']);
 Route::get('admin/project/edit/{project}', [ProjectController::class, 'edit']);
 Route::put('admin/project/{project}', [ProjectController::class, 'update']);
-Route::delete('admin/project/{project}', [ProjectController::class, 'delete']);
+Route::delete('admin/project/{project}', [ProjectController::class, 'destroy']);
 
 // Template
 Route::get('template', [TemplateController::class, 'index']);
@@ -64,16 +64,16 @@ Route::post('admin/template', [TemplateController::class, 'store']);
 Route::get('template/{template}', [TemplateController::class, 'show']);
 Route::get('admin/template/edit/{template}', [TemplateController::class, 'edit']);
 Route::put('admin/template/{template}', [TemplateController::class, 'update']);
-Route::delete('admin/template/{template}', [TemplateController::class, 'delete']);
+Route::delete('admin/template/{template}', [TemplateController::class, 'destroy']);
 
 // Image
 Route::get('admin/image', [ImageController::class, 'index']);
-Route::get('admin/image/create', [ImageController::class, 'create']);
-Route::post('admin/image', [ImageController::class, 'store']);
-Route::get('admin/image/{image}', [ImageController::class, 'show']);
-Route::get('admin/image/edit/{image}', [ImageController::class, 'edit']);
-Route::put('admin/image/{image}', [ImageController::class, 'update']);
-Route::delete('admin/image/{image}', [ImageController::class, 'delete']);
+Route::get('admin/image/create', [ImageController::class, 'create'])->name('image.create');
+Route::post('admin/image', [ImageController::class, 'store'])->name('image.store');
+Route::get('admin/image/{image}', [ImageController::class, 'show'])->name('image.show');
+Route::get('admin/image/edit/{image}', [ImageController::class, 'edit'])->name('image.edit');
+Route::put('admin/image/{image}', [ImageController::class, 'update'])->name('image.update');
+Route::delete('admin/image/{image}', [ImageController::class, 'destroy']);
 
 // Tag
 Route::get('admin/tag', [TagController::class, 'index']);
@@ -82,7 +82,7 @@ Route::post('admin/tag', [TagController::class, 'store'])->name('tag.store');
 Route::get('admin/tag/{tag}', [TagController::class, 'show'])->name('tag.show');
 Route::get('admin/tag/edit/{tag}', [TagController::class, 'edit'])->name('tag.edit');
 Route::put('admin/tag/{tag}', [TagController::class, 'update'])->name('tag.edit');
-Route::delete('admin/tag/{tag}', [TagController::class, 'delete']);
+Route::delete('admin/tag/{tag}', [TagController::class, 'destroy']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
