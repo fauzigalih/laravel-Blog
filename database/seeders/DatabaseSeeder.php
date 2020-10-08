@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -68,7 +69,10 @@ class DatabaseSeeder extends Seeder
                     didalam token pada sisi client. Sebagian besar aplikasi web modern menggunakan JWT untuk authentication
                     dengan alasan scalabilty dan mobile device authentication.</p>',
             'tag' => 'Auth',
-            'url' => 'authentication-dan-authorization'
+            'url' => 'authentication-dan-authorization',
+            'status' => true,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
     }
 }
