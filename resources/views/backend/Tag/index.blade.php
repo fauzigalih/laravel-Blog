@@ -18,8 +18,19 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $data->tag }}</td>
                 <td>
-                    <a href="{{ url('admin/tag/'.$data->id) }}">view</a>
-                    <a href="{{ url('admin/tag/edit/'.$data->id) }}">edit</a>
+                    <form action="{{ url('admin/tag/'.$data->id) }}" method="POST" class="d-inline">
+                        @method('GET')
+                        <button class="btn btn-link p-0">view</button>
+                    </form>
+                    <form action="{{ url('admin/tag/edit/'.$data->id) }}" method="POST" class="d-inline">
+                        @method('GET')
+                        <button class="btn btn-link p-0">edit</button>
+                    </form>
+                    <form action="{{ url('admin/tag/'.$data->id) }}" method="POST" class="d-inline">
+                        @method('DELETE')
+                        @csrf
+                        <button class="btn btn-link p-0">delete</button>
+                    </form>
                 </td>
             </tr>
             @endforeach
