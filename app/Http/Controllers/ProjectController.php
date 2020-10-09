@@ -17,6 +17,12 @@ class ProjectController extends Controller
         //
     }
 
+    public function admin()
+    {
+        $model = new Project();
+        return view('backend.project.index', compact('model'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
