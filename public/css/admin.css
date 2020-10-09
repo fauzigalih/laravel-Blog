@@ -7,6 +7,15 @@
 
 body {
     background-color: white;
+    display: grid;
+    grid-template-areas: 
+    'headermain'
+    'footer';
+    min-height: 100vh;
+}
+
+header {
+    grid-area: headermain;
 }
 
 nav {
@@ -55,6 +64,7 @@ nav button.btn-outline {
 main {
     margin: 100px 124px 40px 124px;
     color: rgba(41, 41, 41, 1);
+    grid-area: headermain;
 }
 
 main .welcome {
@@ -116,11 +126,8 @@ footer {
     width: 100%;
     background-color: #E9ECEF;
     padding: 2rem 124px .7rem 124px;
-}
-
-footer.fixed {
-    bottom: 0;
-    position: fixed;
+    grid-area: footer;
+    align-self: end;
 }
 
 header nav a span,
@@ -139,6 +146,10 @@ footer .header {
 
 footer .header .logo {
     grid-area: logo;
+}
+
+footer .header .logo a {
+    text-decoration: none;
 }
 
 footer .nav-footer {
