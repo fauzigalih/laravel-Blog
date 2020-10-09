@@ -39,7 +39,7 @@ class ImageController extends Controller
         Image::validateData($request);
 
         $fileName = strtolower(str_replace(' ', '-', $request->name)).date('dmy').'.'.$request->image_url->extension();
-        $request->image_url->move(public_path('img/article'), $fileName);
+        $request->image_url->move(public_path('img/post'), $fileName);
         Image::create(array_merge($request->all(), ['image_url' => $fileName]));
         return redirect('admin/image')->with('success', 'Data Berhasil Ditambahkan!');
     }
@@ -88,6 +88,7 @@ class ImageController extends Controller
      */
     public function destroy(Image $image)
     {
+        unlink(public_path('img/post/'.$image->image_url));
         Image::destroy($image->id);
         return redirect('admin/image')->with('danger', 'Data Berhasil Dihapus!');
     }
