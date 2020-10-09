@@ -17,6 +17,12 @@ class TemplateController extends Controller
         //
     }
 
+    public function admin()
+    {
+        $model = new Template();
+        return view('backend.template.index', compact('model'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
