@@ -1,7 +1,8 @@
 @php
-    $arrAction = explode('\\', Route::currentRouteAction());
-    $arrController = explode('@', $arrAction[3]);
-    $controller = $arrController[0];
+    $arrRouteAction = explode('\\', Route::currentRouteAction());
+    $arrRoute = explode('@', $arrRouteAction[3]);
+    $controller = $arrRoute[0];
+    $action = $arrRoute[1];
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
