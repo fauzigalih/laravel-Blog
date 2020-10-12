@@ -1,6 +1,5 @@
 @php
     $view = Route::currentRouteName() === 'blog.show';
-    $create = Route::currentRouteName() === 'blog.create';
     $edit = Route::currentRouteName() === 'blog.edit';
 
     $action = 'admin/blog';
@@ -26,7 +25,7 @@
     </div>
     <div class="form-group">
         <label for="article">Article</label>
-        <textarea name="article" class="form-control" id="article" rows="3" placeholder="Article" required>{{ old('article') }}</textarea>
+        <textarea name="article" class="form-control" rows="3" id="article" placeholder="Article" @if ($view) readonly @endif required>{{ ($view || $edit) ? $model->article : old('article') }}</textarea>
     </div>
     <div class="form-group">
         <label for="tag">Tag</label>
@@ -38,6 +37,18 @@
             @endif
         @else
             value="{{ old('tag') }}"
+        @endif>
+    </div>
+    <div class="form-group">
+        <label for="thumbnail">Thumbnail</label>
+        <input name="thumbnail" type="thumbnail" class="form-control" id="thumbnail" placeholder="URL Image Thumbnail" required
+        @if ($view || $edit)
+            value="{{ $model->thumbnail }}"
+            @if ($view)
+                readonly
+            @endif
+        @else
+            value="{{ old('thumbnail') }}"
         @endif>
     </div>
     <button class="btn btn-success">Save</button>
