@@ -39,10 +39,12 @@ Route::get('privacy-policy', [PageController::class, 'privacypolicy']);
 // Blog
 Route::get('blog', [BlogController::class, 'index']);
 Route::get('admin/blog', [BlogController::class, 'admin']);
-Route::get('admin/blog/create', [BlogController::class, 'create'])->name('aww');
+Route::get('admin/blog/create', [BlogController::class, 'create']);
 Route::post('admin/blog', [BlogController::class, 'store']);
-Route::get('blog/{blog}', [BlogController::class, 'show']);
-Route::get('admin/blog/edit/{blog}', [BlogController::class, 'edit']);
+// Route::get('admin/blog/{blog}', [BlogController::class, 'show'])->where('blog', '[\w\d\-\_]+');  =>optional
+Route::get('admin/blog/{blog}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('blog/{url}', [BlogController::class, 'demo']);
+Route::get('admin/blog/edit/{blog}', [BlogController::class, 'edit'])->name('blog.edit');
 Route::put('admin/blog/{blog}', [BlogController::class, 'update']);
 Route::delete('admin/blog/{blog}', [BlogController::class, 'destroy']);
 
