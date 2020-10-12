@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Project;
+use App\Models\Template;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -54,8 +56,17 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        $model = Blog::findOrFail($blog->url);
-        return view('frontend.blog.article', compact('model'));
+        $model = Blog::findOrFail($blog->id);
+        return view('backend.blog.view', compact('model'));
+    }
+
+    public function demo($url)
+    {
+        $model = Blog::firstWhere('url', $url);
+        $blog = Blog::where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        $project = Project::where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        $template = Template::where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        return view('frontend.blog.article', compact('model', 'blog', 'project', 'template'));
     }
 
     /**
@@ -66,7 +77,8 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        //
+        $model = Blog::findOrFail($blog->id);
+        return view('backend.blog.edit', compact('model'));
     }
 
     /**
@@ -89,12 +101,7 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        //
-    }
-
-    public function indexAdmin()
-    {
-        $model = new Blog();
-        return view('backend.blog.index', compact('model'));
+        Blog::destroy($blog->id);
+        return redirect('admin/blog')->with('danger', 'Data Berhasil Dihapus!');
     }
 }
