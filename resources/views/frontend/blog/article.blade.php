@@ -8,7 +8,7 @@
           <div class="content-uploader">
             <img src="{{ asset('img/garuda.jpg') }}" alt="">
             <a href="">Fauzi Galih Aji Saputro</a>
-            <p class="content-update">Nov 11, 2020</p>
+            <p class="content-update">{{ $model->created_at->format('M d, Y') }}</p>
             <div class="content-uploader-media">
               <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
               <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
@@ -26,9 +26,18 @@
         </div>
         <div class="content-tag">
           <ul>
-            <li><a href="">Authentication</a></li>
-            <li><a href="">Responsive</a></li>
-            <li><a href="">Rest Api</a></li>
+            @php
+                $tags = explode(',', ucwords(str_replace('.', '', strtolower($model->tag))));
+            @endphp
+            @foreach ($tags as $tag)
+              @php
+                $spt = str_split($tag);
+                if($spt[0] == ' ') unset($spt[0]);
+                $tag = implode('', $spt);
+                $url = strtolower(str_replace(' ', '-', $tag));
+              @endphp
+              <li><a href="{{ url('tag/'.$url) }}">{{ $tag }}</a></li>
+            @endforeach
           </ul>
         </div>
         <div class="side-advertisement size480x320">
@@ -69,46 +78,29 @@
             <h2 class="mb-0">
               <button class="btn btn-block text-left side-new-title" type="button" data-toggle="collapse"
                 data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                <span>#</span> The Latest Blog
+                <span>#</span> Blog Terbaru
               </button>
             </h2>
           </div>
           <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
               <ul>
-                <li>
-                  <a href="">
-                    <img src="img/garuda.jpg" alt="">
-                    <p class="title">Authentication dan authorization Authentication dan authorization</p>
-                    <p class="date">Nov 11, 2020</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <img src="img/garuda.jpg" alt="">
-                    <p class="title">Authentication dan authorization Authentication dan authorization</p>
-                    <p class="date">Nov 11, 2020</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <img src="img/garuda.jpg" alt="">
-                    <p class="title">Authentication dan authorization Authentication dan authorization</p>
-                    <p class="date">Nov 11, 2020</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <img src="img/garuda.jpg" alt="">
-                    <p class="title">Authentication dan authorization Authentication dan authorization</p>
-                    <p class="date">Nov 11, 2020</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="" class="more">
-                    <p>SHOW MORE</p>
-                  </a>
-                </li>
+                @foreach ($blog as $data)
+                  <li>
+                    <a href="{{ url('blog/'.$data->url) }}">
+                      <img src="{{ asset('img/post/'.$data->thumbnail) }}" alt="">
+                      <p class="title">{{ $data->title }}</p>
+                      <p class="date">{{ $data->created_at->format('M d, Y') }}</p>
+                    </a>
+                  </li>
+                @endforeach
+                @if ($blog->count() >= 5)
+                  <li>
+                    <a href="{{ url('blog') }}" class="more">
+                      <p>SHOW MORE</p>
+                    </a>
+                  </li>
+                @endif
               </ul>
             </div>
           </div>
@@ -118,46 +110,29 @@
             <h2 class="mb-0">
               <button class="btn btn-block text-left collapsed side-new-title" type="button" data-toggle="collapse"
                 data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                <span>#</span> The Latest Project
+                <span>#</span> Project Terbaru
               </button>
             </h2>
           </div>
           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
             <div class="card-body">
               <ul>
-                <li>
-                  <a href="">
-                    <img src="img/garuda.jpg" alt="">
-                    <p class="title">Authentication dan authorization Authentication dan authorization</p>
-                    <p class="date">Nov 11, 2020</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <img src="img/garuda.jpg" alt="">
-                    <p class="title">Authentication dan authorization Authentication dan authorization</p>
-                    <p class="date">Nov 11, 2020</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <img src="img/garuda.jpg" alt="">
-                    <p class="title">Authentication dan authorization Authentication dan authorization</p>
-                    <p class="date">Nov 11, 2020</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <img src="img/garuda.jpg" alt="">
-                    <p class="title">Authentication dan authorization Authentication dan authorization</p>
-                    <p class="date">Nov 11, 2020</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="" class="more">
-                    <p>SHOW MORE</p>
-                  </a>
-                </li>
+                @foreach ($project as $data)
+                  <li>
+                    <a href="{{ url('project/'.$data->url) }}">
+                      <img src="{{ asset('img/garuda.jpg') }}" alt="">
+                      <p class="title">{{ $data->title }}</p>
+                      <p class="date">{{ $data->created_at->format('M d, Y') }}</p>
+                    </a>
+                  </li>
+                @endforeach
+                @if ($project->count() >= 5)
+                  <li>
+                    <a href="{{ url('project') }}" class="more">
+                      <p>SHOW MORE</p>
+                    </a>
+                  </li>
+                @endif
               </ul>
             </div>
           </div>
@@ -167,46 +142,29 @@
             <h2 class="mb-0">
               <button class="btn btn-block text-left collapsed side-new-title" type="button" data-toggle="collapse"
                 data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                <span>#</span> The Latest Template
+                <span>#</span> Template Terbaru
               </button>
             </h2>
           </div>
           <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
             <div class="card-body">
               <ul>
-                <li>
-                  <a href="">
-                    <img src="img/garuda.jpg" alt="">
-                    <p class="title">Authentication dan authorization Authentication dan authorization</p>
-                    <p class="date">Nov 11, 2020</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <img src="img/garuda.jpg" alt="">
-                    <p class="title">Authentication dan authorization Authentication dan authorization</p>
-                    <p class="date">Nov 11, 2020</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <img src="img/garuda.jpg" alt="">
-                    <p class="title">Authentication dan authorization Authentication dan authorization</p>
-                    <p class="date">Nov 11, 2020</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <img src="img/garuda.jpg" alt="">
-                    <p class="title">Authentication dan authorization Authentication dan authorization</p>
-                    <p class="date">Nov 11, 2020</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="" class="more">
-                    <p>SHOW MORE</p>
-                  </a>
-                </li>
+                @foreach ($template as $data)
+                  <li>
+                    <a href="{{ url('template/'.$data->url) }}">
+                      <img src="{{ asset('img/garuda.jpg') }}" alt="">
+                      <p class="title">{{ $data->title }}</p>
+                      <p class="date">{{ $data->created_at->format('M d, Y') }}</p>
+                    </a>
+                  </li>
+                @endforeach
+                @if ($template->count() >= 5)
+                  <li>
+                    <a href="{{ url('template') }}" class="more">
+                      <p>SHOW MORE</p>
+                    </a>
+                  </li>
+                @endif
               </ul>
             </div>
           </div>
