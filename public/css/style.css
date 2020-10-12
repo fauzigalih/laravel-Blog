@@ -7,6 +7,11 @@
 
 body {
     background-color: #F8F9FA;
+    display: grid;
+    grid-template-areas: 
+    'headermain'
+    'footer';
+    min-height: 100vh;
 }
 
 .play-font {
@@ -15,6 +20,10 @@ body {
 
 .serif-font {
     font-family: 'Source Serif Pro', serif;
+}
+
+header {
+    grid-area: headermain;
 }
 
 nav {
@@ -59,6 +68,7 @@ main {
     display: flex;
     justify-content: space-between;
     margin: 100px 124px 40px 124px;
+    grid-area: headermain;
 }
 
 /* START Dashboard Main Layout */
@@ -400,11 +410,13 @@ main .content .content-body .content-body-generate ul li {
 
 main .content .content-body .content-tag ul {
     display: flex;
+    flex-wrap: wrap;
     margin: 3rem 0;
 }
 
 main .content .content-body .content-tag ul li {
     list-style: none;
+    margin-bottom: 1rem;
 }
 
 main .content .content-body .content-tag ul li a {
@@ -641,6 +653,8 @@ footer {
     width: 100%;
     background-color: #E9ECEF;
     padding: 2rem 124px .7rem 124px;
+    grid-area: footer;
+    align-self: end;
 }
 
 footer .logo span {
@@ -658,6 +672,10 @@ footer .header {
 
 footer .header .logo {
     grid-area: logo;
+}
+
+footer .header .logo a {
+    text-decoration: none;
 }
 
 footer .nav-footer {
