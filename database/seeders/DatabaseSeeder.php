@@ -69,6 +69,7 @@ class DatabaseSeeder extends Seeder
                     didalam token pada sisi client. Sebagian besar aplikasi web modern menggunakan JWT untuk authentication
                     dengan alasan scalabilty dan mobile device authentication.</p>',
             'tag' => 'Auth',
+            'thumbnail' => 'mi-ayam081020.png',
             'url' => 'authentication-dan-authorization',
             'status' => true,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
