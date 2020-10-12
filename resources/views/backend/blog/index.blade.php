@@ -14,6 +14,7 @@
             <th scope="col">Title</th>
             <th scope="col">Article</th>
             <th scope="col">Tag</th>
+            <th scope="col">Status</th>
             <th scope="col">Action</th>
         </tr>
         </thead>
@@ -37,8 +38,13 @@
                 <td>{{ $data->title }}</td>
                 <td>{{ $string }}</td>
                 <td>{{ $data->tag }}</td>
+                <td>{{ ($data->status === 1) ? 'Publish' : 'Draft' }}</td>
                 <td>
                     <form action="{{ url('blog/'.$data->url) }}" method="POST" class="d-inline">
+                        @method('GET')
+                        <button class="btn btn-link p-0">demo</button>
+                    </form>
+                    <form action="{{ url('admin/blog/'.$data->id) }}" method="POST" class="d-inline">
                         @method('GET')
                         <button class="btn btn-link p-0">view</button>
                     </form>
