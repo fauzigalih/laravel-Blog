@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use App\Models\Blog;
+use App\Models\Project;
+use App\Models\Template;
 
 class PageController extends Controller
 {
@@ -14,7 +17,10 @@ class PageController extends Controller
     public function index()
     {
         $model = new Page();
-        return view('frontend.pages.index', compact('model'));
+        $blog = Blog::where('status', 1)->orderBy('created_at', 'desc')->take(4)->get();
+        $project = Project::where('status', 1)->orderBy('created_at', 'desc')->take(4)->get();
+        $template = Template::where('status', 1)->orderBy('created_at', 'desc')->take(4)->get();
+        return view('frontend.pages.index', compact('blog', 'project', 'template'));
     }
 
     public function about()
