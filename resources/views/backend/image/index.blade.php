@@ -19,7 +19,7 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $data->name }}</td>
-                <td><img src="{{ asset('img/article/'.$data->image_url) }}" alt="{{ $data->image_url }}" style="width: 70px; height: 50px;"></td>
+                <td><img src="{{ asset('img/post/'.$data->image_url) }}" alt="{{ $data->image_url }}" style="width: 70px; height: 50px;"></td>
                 <td>{{ $data->reference }}</td>
                 <td>
                     <button class="btn btn-link p-0">salin</button>
