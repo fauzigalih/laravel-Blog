@@ -74,7 +74,7 @@
     </div>
   </div>
   <div class="bottom">
-    &copy; 2020 <a href="{{ url('/') }}">Block Code</a> | Made with ❤️ by <a href="">Fauzi Galih Aji Saputro</a>
+    &copy; 2020 <a href="{{ url('/') }}">Block Code</a> | Made with ❤️ by <a href="{{ url('about') }}">Fauzi Galih Aji Saputro</a>
   </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

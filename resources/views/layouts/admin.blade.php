@@ -82,7 +82,7 @@
       </div>
     </div>
     <div class="bottom">
-      &copy; 2020 <a href="{{ url('admin/home') }}">Block Code</a> | Made with ❤️ by <a href="">Fauzi Galih Aji Saputro</a>
+      &copy; 2020 <a href="{{ url('admin/home') }}">Block Code</a> | Made with ❤️ by <a href="{{ url('admin/about') }}">Fauzi Galih Aji Saputro</a>
     </div>
   </footer>
 </body>
