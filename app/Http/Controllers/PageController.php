@@ -6,6 +6,7 @@ use App\Models\Page;
 use App\Models\Blog;
 use App\Models\Project;
 use App\Models\Template;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
@@ -45,5 +46,22 @@ class PageController extends Controller
     {
         $model = Page::findOrFail(1);
         return view('frontend.pages.privacypolicy', compact('model'));
+    }
+
+    public function searchUrl(Request $request)
+    {
+        return redirect('search/'.$request->search);
+    }
+    
+    public function search($search)
+    {
+        $model = Blog::where('title', 'like', '%' . $search . '%')->get();
+        return view('frontend.pages.search', compact('model', 'search'));
+    }
+    
+    public function tag($tag)
+    {
+        $model = Blog::where('tag', 'like', '%' . $tag . '%')->get();
+        return view('frontend.pages.tag', compact('model', 'tag'));
     }
 }
