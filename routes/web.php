@@ -35,6 +35,9 @@ Route::get('about', [PageController::class, 'about']);
 Route::get('contact', [PageController::class, 'contact']);
 Route::get('terms-of-service', [PageController::class, 'termsofservice']);
 Route::get('privacy-policy', [PageController::class, 'privacypolicy']);
+Route::post('search', [PageController::class, 'searchUrl']);
+Route::get('search/{search}', [PageController::class, 'search']);
+Route::get('tag/{tag}', [PageController::class, 'tag']);
 
 // Blog
 Route::get('blog', [BlogController::class, 'index']);
