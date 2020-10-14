@@ -19,10 +19,20 @@ class DatabaseSeeder extends Seeder
             'about' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus impedit odit ut amet facilis quas dolore, veritatis sunt fuga ipsa.',
             'contact' => 'contact',
             'termsofservice' => 'termsofservice',
-            'privacypolicy' => 'privacypolicy'
+            'privacypolicy' => 'privacypolicy',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
-        DB::table('blogs')->insert([
+        DB::table('images')->insert([
+            'name' => 'Mi Ayam',
+            'image_url' => 'mi-ayam081020.png',
+            'reference' => 'http://localhost/phpmyadmin/sql.php?server=1&db=blog_origin&table=images&pos=0',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('posts')->insert([
             'title' => 'Authentication dan authorization',
             'article' => '<p>
                     Authentication dan authorization adalah kunci untuk mendapatkan akses kepada resources corporate — banyak
@@ -68,8 +78,10 @@ class DatabaseSeeder extends Seeder
                 <p>Perbedaan yang sangat besar disini adalah user’s state tidak disimpan di dalam server, akan tetapi disimpan
                     didalam token pada sisi client. Sebagian besar aplikasi web modern menggunakan JWT untuk authentication
                     dengan alasan scalabilty dan mobile device authentication.</p>',
-            'tag' => 'Auth',
+            'category' => 'blog',
+            'tag' => 'Auth Aja, Kuy lah, mabar.',
             'thumbnail' => 'mi-ayam081020.png',
+            'uploader' => 1,
             'url' => 'authentication-dan-authorization',
             'status' => true,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
