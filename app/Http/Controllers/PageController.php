@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
-use App\Models\Blog;
-use App\Models\Project;
-use App\Models\Template;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -17,10 +15,9 @@ class PageController extends Controller
      */
     public function index()
     {
-        $model = new Page();
-        $blog = Blog::where('status', 1)->orderBy('created_at', 'desc')->take(4)->get();
-        $project = Project::where('status', 1)->orderBy('created_at', 'desc')->take(4)->get();
-        $template = Template::where('status', 1)->orderBy('created_at', 'desc')->take(4)->get();
+        $blog = Post::where('category', 'blog')->where('status', 1)->orderBy('created_at', 'desc')->take(4)->get();
+        $project = Post::where('category', 'project')->where('status', 1)->orderBy('created_at', 'desc')->take(4)->get();
+        $template = Post::where('category', 'template')->where('status', 1)->orderBy('created_at', 'desc')->take(4)->get();
         return view('frontend.pages.index', compact('blog', 'project', 'template'));
     }
 
@@ -55,13 +52,21 @@ class PageController extends Controller
     
     public function search($search)
     {
-        $model = Blog::where('title', 'like', '%' . $search . '%')->get();
-        return view('frontend.pages.search', compact('model', 'search'));
+        $model = Post::where('title', 'like', '%' . $search . '%')->get();
+        $blog = Post::where('category', 'blog')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        $project = Post::where('category', 'project')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        $template = Post::where('category', 'template')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        return view('frontend.pages.search', compact('model', 'search', 'blog', 'project', 'template'));
     }
     
     public function tag($tag)
     {
-        $model = Blog::where('tag', 'like', '%' . $tag . '%')->get();
-        return view('frontend.pages.tag', compact('model', 'tag'));
+        $tag = ucwords(str_replace('-', ' ', $tag));
+
+        $model = Post::where('tag', 'like', '%' . $tag . '%')->get();
+        $blog = Post::where('category', 'blog')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        $project = Post::where('category', 'project')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        $template = Post::where('category', 'template')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        return view('frontend.pages.tag', compact('model', 'tag', 'blog', 'project', 'template'));
     }
 }
