@@ -45,11 +45,11 @@ Route::get('admin/blog', [BlogController::class, 'admin']);
 Route::get('admin/blog/create', [BlogController::class, 'create']);
 Route::post('admin/blog', [BlogController::class, 'store']);
 // Route::get('admin/blog/{blog}', [BlogController::class, 'show'])->where('blog', '[\w\d\-\_]+');  =>optional
-Route::get('admin/blog/{blog}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('admin/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('blog/{url}', [BlogController::class, 'demo']);
-Route::get('admin/blog/edit/{blog}', [BlogController::class, 'edit'])->name('blog.edit');
-Route::put('admin/blog/{blog}', [BlogController::class, 'update']);
-Route::delete('admin/blog/{blog}', [BlogController::class, 'destroy']);
+Route::get('admin/blog/edit/{post}', [BlogController::class, 'edit'])->name('blog.edit');
+Route::put('admin/blog/{post}', [BlogController::class, 'update']);
+Route::delete('admin/blog/{post}', [BlogController::class, 'destroy']);
 
 // Project
 Route::get('project', [ProjectController::class, 'index']);
