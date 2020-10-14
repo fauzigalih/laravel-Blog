@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
-use App\Models\Project;
-use App\Models\Template;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -16,13 +14,13 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $model = new Blog();
+        $model = Post::where('category', 'blog')->get();
         return view('frontend.blog.index', compact('model'));
     }
 
     public function admin()
     {
-        $model = new Blog();
+        $model = Post::where('category', 'blog')->get();
         return view('backend.blog.index', compact('model'));
     }
 
@@ -33,8 +31,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        $model = new Blog();
-        return view('backend.blog.create', compact('model'));
+        return view('backend.blog.create');
     }
 
     /**
@@ -54,18 +51,18 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function show(Blog $blog)
+    public function show(Post $post)
     {
-        $model = Blog::findOrFail($blog->id);
+        $model = Post::findOrFail($post->id);
         return view('backend.blog.view', compact('model'));
     }
 
     public function demo($url)
     {
-        $model = Blog::firstWhere('url', $url);
-        $blog = Blog::where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
-        $project = Project::where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
-        $template = Template::where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        $model = Post::firstWhere('url', $url);
+        $blog = Post::where('category', 'blog')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        $project = Post::where('category', 'project')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        $template = Post::where('category', 'template')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
         return view('frontend.blog.article', compact('model', 'blog', 'project', 'template'));
     }
 
@@ -75,9 +72,9 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function edit(Blog $blog)
+    public function edit(Post $post)
     {
-        $model = Blog::findOrFail($blog->id);
+        $model = Post::findOrFail($post->id);
         return view('backend.blog.edit', compact('model'));
     }
 
@@ -88,7 +85,7 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, Post $post)
     {
         //
     }
@@ -99,9 +96,9 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Blog $blog)
+    public function destroy(Post $post)
     {
-        Blog::destroy($blog->id);
+        Post::destroy($post->id);
         return redirect('admin/blog')->with('danger', 'Data Berhasil Dihapus!');
     }
 }
