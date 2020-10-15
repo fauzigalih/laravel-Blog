@@ -42,7 +42,20 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Post::validateData($request);
+        $url = strtolower(str_replace(' ', '-', $request->title));
+        $count = Post::where('url', 'like', '%' . $url . '%')->count();
+        Post::create([
+            'title' => $request->title,
+            'article' => $request->article,
+            'category' => $request->category,
+            'tag' => $request->tag,
+            'thumbnail' => $request->thumbnail,
+            'uploader' => 1,
+            'url' => $count === 0 ? $url : $url.$count,
+            'status' => $request->status
+        ]);
+        return redirect('admin/blog')->with('success', 'Tag Berhasil Ditambahkan!');
     }
 
     /**
@@ -87,7 +100,16 @@ class BlogController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        Post::validateData($request);
+        $model = Post::findOrFail($post->id);
+        Post::updateOrCreate(['id' => $model->id], [
+            'title' => $request->title,
+            'article' => $request->article,
+            'tag' => $request->tag,
+            'thumbnail' => $request->thumbnail,
+            'status' => $request->status
+        ]);
+        return redirect('admin/blog')->with('warning', 'Data Berhasil Diubah!');
     }
 
     /**
