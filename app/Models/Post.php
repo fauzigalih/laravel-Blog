@@ -25,13 +25,13 @@ class Post extends Model
     {
         $request->validate([
             'title' => 'required|string',
-            'article' => 'required|longText',
-            'category' => 'required|string',
+            'article' => 'required',
+            'category' => 'string',
             'tag' => 'required|string',
             'thumbnail' => 'required|string',
-            'uploader' => 'required|integer',
-            'url' => 'required|string',
-            'status' =>'required|boolean'
+            'uploader' => 'integer',
+            'url' => 'string',
+            'status' =>'required|integer'
         ]);
     }
 }
