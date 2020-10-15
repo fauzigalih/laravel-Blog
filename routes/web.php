@@ -45,9 +45,9 @@ Route::get('admin/blog', [BlogController::class, 'admin']);
 Route::get('admin/blog/create', [BlogController::class, 'create']);
 Route::post('admin/blog', [BlogController::class, 'store']);
 // Route::get('admin/blog/{blog}', [BlogController::class, 'show'])->where('blog', '[\w\d\-\_]+');  =>optional
-Route::get('admin/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('admin/blog/{post}', [BlogController::class, 'show']);
 Route::get('blog/{url}', [BlogController::class, 'demo']);
-Route::get('admin/blog/edit/{post}', [BlogController::class, 'edit'])->name('blog.edit');
+Route::get('admin/blog/edit/{post}', [BlogController::class, 'edit']);
 Route::put('admin/blog/{post}', [BlogController::class, 'update']);
 Route::delete('admin/blog/{post}', [BlogController::class, 'destroy']);
 
