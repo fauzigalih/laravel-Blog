@@ -15,7 +15,7 @@ class BlogController extends Controller
     public function index()
     {
         $model = Post::where('category', 'blog')->get();
-        return view('frontend.blog.index', compact('model'));
+        return view('frontend.post.index', compact('model'));
     }
 
     public function admin()
@@ -44,7 +44,7 @@ class BlogController extends Controller
     {
         Post::validateData($request);
         $url = strtolower(str_replace(' ', '-', $request->title));
-        $count = Post::where('url', 'like', '%' . $url . '%')->count();
+        $count = Post::where('category', 'blog')->where('url', 'like', '%' . $url . '%')->count();
         Post::create([
             'title' => $request->title,
             'article' => $request->article,
@@ -76,7 +76,7 @@ class BlogController extends Controller
         $blog = Post::where('category', 'blog')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
         $project = Post::where('category', 'project')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
         $template = Post::where('category', 'template')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
-        return view('frontend.blog.article', compact('model', 'blog', 'project', 'template'));
+        return view('frontend.post.article', compact('model', 'blog', 'project', 'template'));
     }
 
     /**
