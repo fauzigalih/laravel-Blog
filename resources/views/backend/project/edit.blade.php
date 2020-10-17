@@ -1,8 +1,8 @@
 @extends('layouts.admin')
-@section('title', 'Edit Tag')
+@section('title', 'Edit Project')
 @section('content')
 <main>
-    <h2>Edit Tag</h2>
-    @include('backend.tag._form')
+    <h2>Edit Project</h2>
+    @include('backend.post._form')
 </main>
 @endsection    
