@@ -13,7 +13,7 @@
         <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium commodi fugiat ratione saepe ex, dolores expedita vero architecto nemo voluptate, quod, ducimus corporis odio consequuntur deleniti a aliquam? Temporibus, nostrum.</p>
       </div>
       <div class="body">
-        <p>Post<span>: 20</span></p>
+        <p>Post<span>: {{ $blog->count() }}</span></p>
         <p>Tag<span>: 56</span></p>
         <p>Views<span>: 2000</span></p>
       </div>
@@ -25,7 +25,7 @@
         <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium commodi fugiat ratione saepe ex, dolores expedita vero architecto nemo voluptate, quod, ducimus corporis odio consequuntur deleniti a aliquam? Temporibus, nostrum.</p>
       </div>
       <div class="body">
-        <p>Post<span>: 20</span></p>
+        <p>Post<span>: {{ $project->count() }}</span></p>
         <p>Tag<span>: 56</span></p>
         <p>Views<span>: 2000</span></p>
       </div>
@@ -37,7 +37,7 @@
         <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium commodi fugiat ratione saepe ex, dolores expedita vero architecto nemo voluptate, quod, ducimus corporis odio consequuntur deleniti a aliquam? Temporibus, nostrum.</p>
       </div>
       <div class="body">
-        <p>Post<span>: 20</span></p>
+        <p>Post<span>: {{ $template->count() }}</span></p>
         <p>Tag<span>: 56</span></p>
         <p>Views<span>: 2000</span></p>
       </div>
