@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -14,12 +14,13 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $model = Post::where('category', 'project')->get();
+        return view('frontend.post.index', compact('model'));
     }
 
     public function admin()
     {
-        $model = new Project();
+        $model = Post::where('category', 'project')->get();
         return view('backend.project.index', compact('model'));
     }
 
@@ -30,7 +31,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.project.create');
     }
 
     /**
@@ -41,7 +42,20 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Post::validateData($request);
+        $url = strtolower(str_replace(' ', '-', $request->title));
+        $count = Post::where('category', 'project')->where('url', 'like', '%' . $url . '%')->count();
+        Post::create([
+            'title' => $request->title,
+            'article' => $request->article,
+            'category' => $request->category,
+            'tag' => $request->tag,
+            'thumbnail' => $request->thumbnail,
+            'uploader' => 1,
+            'url' => $count === 0 ? $url : $url.$count,
+            'status' => $request->status
+        ]);
+        return redirect('admin/project')->with('success', 'Tag Berhasil Ditambahkan!');
     }
 
     /**
@@ -50,9 +64,19 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show(Post $post)
     {
-        //
+        $model = Post::findOrFail($post->id);
+        return view('backend.project.view', compact('model'));
+    }
+
+    public function demo($url)
+    {
+        $model = Post::firstWhere('url', $url);
+        $blog = Post::where('category', 'blog')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        $project = Post::where('category', 'project')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        $template = Post::where('category', 'template')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        return view('frontend.post.article', compact('model', 'blog', 'project', 'template'));
     }
 
     /**
@@ -61,9 +85,10 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit(Post $post)
     {
-        //
+        $model = Post::findOrFail($post->id);
+        return view('backend.project.edit', compact('model'));
     }
 
     /**
@@ -73,9 +98,18 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, Post $post)
     {
-        //
+        Post::validateData($request);
+        $model = Post::findOrFail($post->id);
+        Post::updateOrCreate(['id' => $model->id], [
+            'title' => $request->title,
+            'article' => $request->article,
+            'tag' => $request->tag,
+            'thumbnail' => $request->thumbnail,
+            'status' => $request->status
+        ]);
+        return redirect('admin/project')->with('warning', 'Data Berhasil Diubah!');
     }
 
     /**
@@ -84,8 +118,9 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function destroy(Post $post)
     {
-        //
+        Post::destroy($post->id);
+        return redirect('admin/project')->with('danger', 'Data Berhasil Dihapus!');
     }
 }
