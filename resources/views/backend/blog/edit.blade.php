@@ -3,6 +3,6 @@
 @section('content')
 <main>
     <h2>Edit Blog</h2>
-    @include('backend.blog._form')
+    @include('backend.post._form')
 </main>
 @endsection

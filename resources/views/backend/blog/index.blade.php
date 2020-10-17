@@ -22,10 +22,10 @@
             @foreach ($model->all() as $data)
             @php
                 $string = strip_tags($data->article);
-                if (strlen($string) > 300) {
+                if (strlen($string) > 500) {
 
                     // truncate string
-                    $stringCut = substr($string, 0, 300);
+                    $stringCut = substr($string, 0, 500);
                     $endPoint = strrpos($stringCut, ' ');
 
                     //if the string doesn't contain any space then it will cut without word basis.
