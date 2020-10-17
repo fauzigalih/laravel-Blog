@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Template;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class TemplateController extends Controller
@@ -14,12 +14,13 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        //
+        $model = Post::where('category', 'template')->get();
+        return view('frontend.post.index', compact('model'));
     }
 
     public function admin()
     {
-        $model = new Template();
+        $model = Post::where('category', 'template')->get();
         return view('backend.template.index', compact('model'));
     }
 
@@ -30,7 +31,7 @@ class TemplateController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.template.create');
     }
 
     /**
@@ -41,7 +42,20 @@ class TemplateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Post::validateData($request);
+        $url = strtolower(str_replace(' ', '-', $request->title));
+        $count = Post::where('category', 'template')->where('url', 'like', '%' . $url . '%')->count();
+        Post::create([
+            'title' => $request->title,
+            'article' => $request->article,
+            'category' => $request->category,
+            'tag' => $request->tag,
+            'thumbnail' => $request->thumbnail,
+            'uploader' => 1,
+            'url' => $count === 0 ? $url : $url.$count,
+            'status' => $request->status
+        ]);
+        return redirect('admin/template')->with('success', 'Tag Berhasil Ditambahkan!');
     }
 
     /**
@@ -50,9 +64,19 @@ class TemplateController extends Controller
      * @param  \App\Models\Template  $template
      * @return \Illuminate\Http\Response
      */
-    public function show(Template $template)
+    public function show(Post $post)
     {
-        //
+        $model = Post::findOrFail($post->id);
+        return view('backend.template.view', compact('model'));
+    }
+
+    public function demo($url)
+    {
+        $model = Post::firstWhere('url', $url);
+        $blog = Post::where('category', 'blog')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        $project = Post::where('category', 'project')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        $template = Post::where('category', 'template')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        return view('frontend.post.article', compact('model', 'blog', 'project', 'template'));
     }
 
     /**
@@ -61,9 +85,10 @@ class TemplateController extends Controller
      * @param  \App\Models\Template  $template
      * @return \Illuminate\Http\Response
      */
-    public function edit(Template $template)
+    public function edit(Post $post)
     {
-        //
+        $model = Post::findOrFail($post->id);
+        return view('backend.template.edit', compact('model'));
     }
 
     /**
@@ -73,9 +98,18 @@ class TemplateController extends Controller
      * @param  \App\Models\Template  $template
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Template $template)
+    public function update(Request $request, Post $post)
     {
-        //
+        Post::validateData($request);
+        $model = Post::findOrFail($post->id);
+        Post::updateOrCreate(['id' => $model->id], [
+            'title' => $request->title,
+            'article' => $request->article,
+            'tag' => $request->tag,
+            'thumbnail' => $request->thumbnail,
+            'status' => $request->status
+        ]);
+        return redirect('admin/template')->with('warning', 'Data Berhasil Diubah!');
     }
 
     /**
@@ -84,8 +118,9 @@ class TemplateController extends Controller
      * @param  \App\Models\Template  $template
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Template $template)
+    public function destroy(Post $post)
     {
-        //
+        Post::destroy($post->id);
+        return redirect('admin/template')->with('danger', 'Data Berhasil Dihapus!');
     }
 }
