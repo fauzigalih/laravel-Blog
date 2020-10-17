@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use App\Models\Post;
 
 class AdminPageController extends Controller
 {
@@ -13,8 +14,10 @@ class AdminPageController extends Controller
      */
     public function index()
     {
-        $model = new Page();
-        return view('backend.pages.index', compact('model'));
+        $blog = Post::where('category', 'blog');
+        $project = Post::where('category', 'project');
+        $template = Post::where('category', 'template');
+        return view('backend.pages.index', compact('blog', 'project', 'template'));
     }
 
     public function about()
