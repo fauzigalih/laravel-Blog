@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
@@ -77,7 +78,21 @@ class ImageController extends Controller
      */
     public function update(Request $request, Image $image)
     {
-        //
+        Image::validateData($request);
+
+        $model = Image::findOrFail($image->id);
+
+        if ($request->image_url == null || $request->image_url == '') {
+            $fileName = $model->image_url;
+        }else{
+            if (file_exists(public_path('img/post/'.$model->image_url))) unlink(public_path('img/post/'.$model->image_url));
+            $fileName = strtolower(str_replace(' ', '-', $request->name)).date('dmy').'.'.$request->image_url->extension();
+            $request->image_url->move(public_path('img/post'), $fileName);
+            Post::where('thumbnail', $model->image_url)->update(['thumbnail' => $fileName]);
+        }
+
+        Image::updateOrCreate(['id' => $model->id], array_merge($request->all(), ['image_url' => $fileName]));
+        return redirect('admin/image')->with('warning', 'Data Berhasil Diubah!');
     }
 
     /**
