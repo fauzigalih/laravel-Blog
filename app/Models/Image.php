@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class Image extends Model
 {
@@ -18,10 +19,10 @@ class Image extends Model
 
     public static function validateData(Request $request)
     {
-        $request->validate([
+        $store = Route::currentRouteName() == 'image.store';
+        $request->validate(array_merge([
             'name' => 'required|string',
-            'image_url' => 'required',
             'reference' => 'string'
-        ]);
+        ], $store ? ['image_url' => 'required|image'] : ['image_url' => 'image']));
     }
 }
