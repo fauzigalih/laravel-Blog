@@ -6,7 +6,15 @@
     $action = 'admin/image';
     if ($edit) $action = 'admin/image/' . $model->id ?? 0; 
 @endphp
-
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <form action="{{ url($action) }}" method="POST" enctype="multipart/form-data">
     @if ($edit)
         @method('PUT')
