@@ -51,9 +51,6 @@
           <li class="nav-item">
             <a href="{{ url('admin/image') }}" class="nav-link @if ($controller === 'ImageController') active @endif">Image</a>
           </li>
-          <li class="nav-item">
-            <a href="{{ url('admin/tag') }}" class="nav-link @if ($controller === 'TagController') active @endif">Tag</a>
-          </li>
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Fauzi Galih</a>
             <div class="dropdown-menu" aria-labelledby="navMenu">
