@@ -9,7 +9,7 @@
     $edit = $action == 'edit';
 
     $url = 'admin/'.$control;
-    if ($edit) $url = 'admin/'.$control.'/'.$model->id ?? 0; 
+    if ($edit) $url = 'admin/'.$control.'/'.$model->id ?? 0;
 @endphp
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -20,7 +20,7 @@
         </ul>
     </div>
 @endif
-<form action="{{ url($url) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ url($url) }}" method="POST">
     @if ($edit)
         @method('PUT')
     @endif
@@ -68,8 +68,19 @@
     </div>
     <div class="form-group">
         <label for="status">Status</label>
-        <select name="status" class="custom-select" id="status" required>
-            <option selected disabled value="{{ ($view || $edit) ? $model->status : old('status') }}">{{ old('status') ? ( old('status') == 1 ? 'Publish' : 'Draft') : 'Pilih' }}</option>
+        <select name="status" class="custom-select" id="status" @if ($view) disabled @endif required>
+            <option selected disabled value="{{ ($view || $edit) ? $model->status : old('status') }}">
+                @php
+                    $status = 'Pilih';
+                    if ($view || $edit) {
+                        $model->status === 1 ? $status = 'Publish' : $status = 'Draft';
+                    }else{
+                        if (old('status') === '1') $status = 'Publish';
+                        if (old('status') === '0') $status = 'Draft';
+                    }
+                @endphp
+                {{ $status }}
+            </option>
             <option value="1">Publish</option>
             <option value="0">Draft</option>
         </select>
