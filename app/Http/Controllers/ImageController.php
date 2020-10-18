@@ -39,7 +39,7 @@ class ImageController extends Controller
     {
         Image::validateData($request);
 
-        $fileName = strtolower(str_replace(' ', '-', $request->name)).date('dmy').'.'.$request->image_url->extension();
+        $fileName = 'img'.date('dmYHis').'.'.$request->image_url->extension();
         $request->image_url->move(public_path('img/post'), $fileName);
         Image::create(array_merge($request->all(), ['image_url' => $fileName]));
         return redirect('admin/image')->with('success', 'Data Berhasil Ditambahkan!');
@@ -86,9 +86,8 @@ class ImageController extends Controller
             $fileName = $model->image_url;
         }else{
             if (file_exists(public_path('img/post/'.$model->image_url))) unlink(public_path('img/post/'.$model->image_url));
-            $fileName = strtolower(str_replace(' ', '-', $request->name)).date('dmy').'.'.$request->image_url->extension();
+            $fileName = $model->image_url;
             $request->image_url->move(public_path('img/post'), $fileName);
-            Post::where('thumbnail', $model->image_url)->update(['thumbnail' => $fileName]);
         }
 
         Image::updateOrCreate(['id' => $model->id], array_merge($request->all(), ['image_url' => $fileName]));
