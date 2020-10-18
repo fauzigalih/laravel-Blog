@@ -122,6 +122,11 @@ main textarea {
     min-height: 22rem;
 }
 
+main input.copy {
+    opacity: 0;
+    width: 1rem;
+}
+
 footer {
     width: 100%;
     background-color: #E9ECEF;
