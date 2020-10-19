@@ -40,7 +40,7 @@
                 <td>{{ $data->tag }}</td>
                 <td>{{ ($data->status === 1) ? 'Publish' : 'Draft' }}</td>
                 <td>
-                    <form action="{{ url('project/'.$data->url) }}" method="POST" class="d-inline">
+                    <form action="{{ url('project/'.$data->url) }}" method="POST" class="d-inline" target="_blank">
                         @method('GET')
                         <button class="btn btn-link p-0">demo</button>
                     </form>
