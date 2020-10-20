@@ -1,10 +1,4 @@
 @php
-    $arrRouteAction = explode('\\', Route::currentRouteAction());
-    $arrRoute = explode('@', $arrRouteAction[3]);
-    $controller = $arrRoute[0];
-    $action = $arrRoute[1];
-
-    $control = str_replace('controller', '', strtolower($controller));
     $view = $action == 'show';
     $edit = $action == 'edit';
 
@@ -38,8 +32,17 @@
             value="{{ old('title') }}"
         @endif>
     </div>
+    
     <div class="form-group">
-        <label for="article">Article</label>
+        <label for="article">Article</label><br>
+        <div class="btn-group article" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-info titleparagraf">Tittle & Paragraf</button>
+            <button type="button" class="btn btn-info subtitleparagraf">Sub Tittle & Paragraf</button>
+            <button type="button" class="btn btn-info paragraf">Paragraf</button>
+            <button type="button" class="btn btn-info image">Image</button>
+            <button type="button" class="btn btn-info list">List</button>
+            <button type="button" class="btn btn-info delete">Delete All</button>
+        </div>
         <textarea name="article" class="form-control" rows="3" id="article" placeholder="Article" @if ($view) readonly @endif required>{{ ($view || $edit) ? $model->article : old('article') }}</textarea>
     </div>
     <div class="form-group">
@@ -69,7 +72,7 @@
     <div class="form-group">
         <label for="status">Status</label>
         <select name="status" class="custom-select" id="status" @if ($view) disabled @endif required>
-            <option selected disabled value="{{ ($view || $edit) ? $model->status : old('status') }}">
+            <option selected value="{{ ($view || $edit) ? $model->status : old('status') }}">
                 @php
                     $status = 'Pilih';
                     if ($view || $edit) {
