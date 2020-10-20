@@ -22,7 +22,7 @@
                 <td>
                     <img src="{{ asset('img/post/'.$data->image_url) }}" alt="{{ $data->image_url }}" style="width: 70px; height: 50px;">
                 </td>
-                <td>{{ $data->reference }}<input type="text" value="{{ $data->image_url }}" class="image_url copy"></td>
+                <td>{{ $data->reference }}<input type="text" value="{{ asset('img/post/'.$data->image_url) }}" class="image_url copy"></td>
                 <td>
                     <button class="btn btn-link p-0 copy">salin</button>
                     <form action="{{ url('admin/image/'.$data->id) }}" method="POST" class="d-inline">
