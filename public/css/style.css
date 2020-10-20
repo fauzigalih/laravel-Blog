@@ -77,6 +77,10 @@ main.main {
     display: unset;
 }
 
+main.auth {
+    display: unset;
+}
+
 main.main.article {
     margin: 40px 0 40px 0;
 }
