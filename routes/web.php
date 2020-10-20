@@ -8,6 +8,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ use App\Http\Controllers\TagController;
 */
 
 // Admin Static Pages
-Route::get('admin', [AdminPageController::class, 'index']);
+Route::get('admin', [AdminPageController::class, 'index'])->middleware('auth');
 Route::get('admin/about', [AdminPageController::class, 'about']);
 Route::get('admin/contact', [AdminPageController::class, 'contact']);
 Route::get('admin/terms-of-service', [AdminPageController::class, 'termsofservice']);
@@ -82,6 +83,10 @@ Route::get('admin/image/edit/{image}', [ImageController::class, 'edit'])->name('
 Route::put('admin/image/{image}', [ImageController::class, 'update'])->name('image.update');
 Route::delete('admin/image/{image}', [ImageController::class, 'destroy']);
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// User
+Route::get('admin/login', [UserController::class, 'login'])->name('login');
+Route::get('admin/register', [UserController::class, 'register']);
+
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
