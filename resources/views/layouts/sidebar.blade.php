@@ -53,7 +53,7 @@
               @foreach ($project as $data)
                 <li>
                   <a href="{{ url('project/'.$data->url) }}">
-                    <img src="{{ asset('img/garuda.jpg') }}" alt="">
+                    <img src="{{ asset('img/post/'.$data->thumbnail) }}" alt="">
                     <p class="title">{{ $data->title }}</p>
                     <p class="date">{{ $data->created_at->format('M d, Y') }}</p>
                   </a>
@@ -91,7 +91,7 @@
               @foreach ($template as $data)
                 <li>
                   <a href="{{ url('template/'.$data->url) }}">
-                    <img src="{{ asset('img/garuda.jpg') }}" alt="">
+                    <img src="{{ asset('img/post/'.$data->thumbnail) }}" alt="">
                     <p class="title">{{ $data->title }}</p>
                     <p class="date">{{ $data->created_at->format('M d, Y') }}</p>
                   </a>
