@@ -21,7 +21,7 @@ class ProjectController extends Controller
     public function admin()
     {
         $model = Post::where('category', 'project')->get();
-        return view('backend.project.index', compact('model'));
+        return view('backend.post.index', compact('model'));
     }
 
     /**
@@ -31,7 +31,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('backend.project.create');
+        return view('backend.post.create');
     }
 
     /**
@@ -45,12 +45,13 @@ class ProjectController extends Controller
         Post::validateData($request);
         $url = strtolower(str_replace(' ', '-', $request->title));
         $count = Post::where('category', 'project')->where('url', 'like', '%' . $url . '%')->count();
+        $thumbnail = explode('/', $request->thumbnail)[array_key_last(explode('/', $request->thumbnail))];
         Post::create([
             'title' => $request->title,
             'article' => $request->article,
             'category' => $request->category,
             'tag' => $request->tag,
-            'thumbnail' => $request->thumbnail,
+            'thumbnail' => $thumbnail,
             'uploader' => 1,
             'url' => $count === 0 ? $url : $url.$count,
             'status' => $request->status
@@ -67,7 +68,7 @@ class ProjectController extends Controller
     public function show(Post $post)
     {
         $model = Post::findOrFail($post->id);
-        return view('backend.project.view', compact('model'));
+        return view('backend.post.view', compact('model'));
     }
 
     public function demo($url)
@@ -88,7 +89,7 @@ class ProjectController extends Controller
     public function edit(Post $post)
     {
         $model = Post::findOrFail($post->id);
-        return view('backend.project.edit', compact('model'));
+        return view('backend.post.edit', compact('model'));
     }
 
     /**
@@ -102,11 +103,12 @@ class ProjectController extends Controller
     {
         Post::validateData($request);
         $model = Post::findOrFail($post->id);
+        $thumbnail = explode('/', $request->thumbnail)[array_key_last(explode('/', $request->thumbnail))];
         Post::updateOrCreate(['id' => $model->id], [
             'title' => $request->title,
             'article' => $request->article,
             'tag' => $request->tag,
-            'thumbnail' => $request->thumbnail,
+            'thumbnail' => $thumbnail,
             'status' => $request->status
         ]);
         return redirect('admin/project')->with('warning', 'Data Berhasil Diubah!');
