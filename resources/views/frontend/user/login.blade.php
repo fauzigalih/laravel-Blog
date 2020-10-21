@@ -3,7 +3,16 @@
 @section('content')
 <main class="auth">
     <h1>Login</h1>
-        <form action="">
+    @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form action="{{ url('admin/login') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="email">Email</label>
@@ -15,10 +24,11 @@
             </div>
             <div class="form-group">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="remember" value="">
+                    <input class="form-check-input" type="checkbox" name="remember">
                     <label class="form-check-label" for="remember">Remember Me</label>
                 </div>
             </div>
+            <p>Tidak punya akun? <a href="{{ url('admin/register') }}">Daftar!</a></p>
             <button class="btn btn-primary" type="submit">Login</button>
         </form>
     </main>
