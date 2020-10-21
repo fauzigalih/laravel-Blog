@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Http\Request;
 
 class User extends Authenticatable
 {
@@ -58,4 +59,14 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public static function validateData(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|unique:users,email|string',
+            'password' => 'required|min:6|required_with:confirm|same:confirm',
+            'confirm' => 'required'
+        ]);
+    }
 }
