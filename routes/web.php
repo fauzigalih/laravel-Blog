@@ -7,7 +7,6 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\ImageController;
-use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -23,12 +22,11 @@ use App\Http\Controllers\UserController;
 
 // Admin Static Pages
 Route::get('admin', [AdminPageController::class, 'index'])->middleware('auth');
-Route::get('admin/about', [AdminPageController::class, 'about']);
-Route::get('admin/contact', [AdminPageController::class, 'contact']);
-Route::get('admin/terms-of-service', [AdminPageController::class, 'termsofservice']);
-Route::get('admin/privacy-policy', [AdminPageController::class, 'privacypolicy']);
-Route::get('admin/profile', [AdminPageController::class, 'profile']);
-Route::get('admin/logout', [AdminPageController::class, 'logout']);
+Route::get('admin/about', [AdminPageController::class, 'about'])->middleware('auth');
+Route::get('admin/contact', [AdminPageController::class, 'contact'])->middleware('auth');
+Route::get('admin/terms-of-service', [AdminPageController::class, 'termsofservice'])->middleware('auth');
+Route::get('admin/privacy-policy', [AdminPageController::class, 'privacypolicy'])->middleware('auth');
+Route::get('admin/profile', [AdminPageController::class, 'profile'])->middleware('auth');
 
 // Guest Static Pages
 Route::get('/', [PageController::class, 'index']);
@@ -86,6 +84,9 @@ Route::delete('admin/image/{image}', [ImageController::class, 'destroy']);
 // User
 Route::get('admin/login', [UserController::class, 'login'])->name('login');
 Route::get('admin/register', [UserController::class, 'register']);
+Route::post('admin/register', [UserController::class, 'store']);
+Route::post('admin/login', [UserController::class, 'authenticate']);
+Route::get('admin/logout', [UserController::class, 'logout']);
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('dashboard');
