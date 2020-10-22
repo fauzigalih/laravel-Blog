@@ -14,10 +14,11 @@ class AdminPageController extends Controller
      */
     public function index()
     {
+        $greating = Page::greatings(idate('H'));
         $blog = Post::where('category', 'blog');
         $project = Post::where('category', 'project');
         $template = Post::where('category', 'template');
-        return view('backend.pages.index', compact('blog', 'project', 'template'));
+        return view('backend.pages.index', compact('blog', 'project', 'template', 'greating'));
     }
 
     public function about()
