@@ -12,7 +12,7 @@ class UserController extends Controller
     public function login()
     {
         if (Auth::check()) return redirect('admin');
-        return view('frontend.user.login');
+        return view('backend.user.login');
     }
 
     public function authenticate(Request $request)
@@ -28,7 +28,7 @@ class UserController extends Controller
     public function register()
     {
         if (Auth::check()) return redirect('admin');
-        return view('frontend.user.register');
+        return view('backend.user.register');
     }
 
     public function store(Request $request)
@@ -50,5 +50,11 @@ class UserController extends Controller
             return redirect('admin/login');
         }
         return redirect('/');
+    }
+
+    public function profile()
+    {
+        $model = new User();
+        return view('backend.user.profile');
     }
 }
