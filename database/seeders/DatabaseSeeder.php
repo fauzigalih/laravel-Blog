@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('images')->insert([
             'name' => 'Mi Ayam',
-            'image_url' => 'mi-ayam081020.png',
+            'image_url' => 'mi-ayam171020.png',
             'reference' => 'http://localhost/phpmyadmin/sql.php?server=1&db=blog_origin&table=images&pos=0',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -80,7 +80,7 @@ class DatabaseSeeder extends Seeder
                     dengan alasan scalabilty dan mobile device authentication.</p>',
             'category' => 'blog',
             'tag' => 'Auth Aja, Kuy lah, mabar.',
-            'thumbnail' => 'mi-ayam081020.png',
+            'thumbnail' => 'mi-ayam171020.png',
             'uploader' => 1,
             'url' => 'authentication-dan-authorization',
             'status' => true,
