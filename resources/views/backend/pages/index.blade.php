@@ -3,8 +3,8 @@
 @section('content')
 <main>
   <div class="welcome">
-    <p>Welcome, Good Morning</p>
-    <p>Fauzi Galih Aji Saputro</p>
+    <p>Welcome, {{ $greating }}</p>
+    <p>{{ Auth::user()->name }}</p>
   </div>
   <div class="list-card">
     <div class="blog item-card">
@@ -17,7 +17,7 @@
         <p>Tag<span>: 56</span></p>
         <p>Views<span>: 2000</span></p>
       </div>
-      <a href=""><p>MORE</p></a>
+      <a href="{{ url('admin/blog') }}"><p>MORE</p></a>
     </div>
     <div class="project item-card">
       <div class="header">
@@ -29,7 +29,7 @@
         <p>Tag<span>: 56</span></p>
         <p>Views<span>: 2000</span></p>
       </div>
-      <a href=""><p>MORE</p></a>
+      <a href="{{ url('admin/project') }}"><p>MORE</p></a>
     </div>
     <div class="template item-card">
       <div class="header">
@@ -41,7 +41,7 @@
         <p>Tag<span>: 56</span></p>
         <p>Views<span>: 2000</span></p>
       </div>
-      <a href=""><p>MORE</p></a>
+      <a href="{{ url('admin/template') }}"><p>MORE</p></a>
     </div>
   </div>
 </main>
