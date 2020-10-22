@@ -87,6 +87,7 @@ Route::get('admin/register', [UserController::class, 'register']);
 Route::post('admin/register', [UserController::class, 'store']);
 Route::post('admin/login', [UserController::class, 'authenticate']);
 Route::get('admin/logout', [UserController::class, 'logout']);
+Route::get('admin/profile', [UserController::class, 'profile']);
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('dashboard');
