@@ -119,7 +119,7 @@ main .item-card a p:hover {
 }
 
 main textarea {
-    min-height: 22rem;
+    height: auto;
 }
 
 main input.copy {
