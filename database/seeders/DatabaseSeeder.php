@@ -84,6 +84,7 @@ class DatabaseSeeder extends Seeder
             'uploader' => 1,
             'url' => 'authentication-dan-authorization',
             'status' => true,
+            'view' => 0,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
