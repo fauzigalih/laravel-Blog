@@ -22,6 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'description',
+        'photo'
     ];
 
     /**
@@ -43,6 +45,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'medsos' => 'array'
     ];
 
     /**
@@ -61,6 +64,15 @@ class User extends Authenticatable
             'email' => 'required|unique:users,email|string',
             'password' => 'required|min:6|required_with:confirm|same:confirm',
             'confirm' => 'required'
+        ]);
+    }
+    
+    public static function validateProfile(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|string',
+            'description' => 'required|min:20|string',
         ]);
     }
 }
