@@ -23,7 +23,7 @@ class CreatePostsTable extends Migration
             $table->integer('uploader');
             $table->string('url');
             $table->boolean('status');
-            $table->string('view');
+            $table->integer('view');
             $table->timestamps();
         });
     }
