@@ -2,16 +2,26 @@
 @section('title', 'Profile')
 @section('content')
     <main>
+      @if ($errors->any())
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+      @endif
         <div class="card">
             <h5 class="card-header">Profile User</h5>
             <div class="card-body">
-              <form action="{{ url('admin/profile/'.Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
+              <form action="{{ url('admin/profile/'. Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
                 <h5 class="card-title">Personal</h5>
+                @method('PUT')
                 @csrf
                 <div class="form-group row">
                     <label for="name" class="col-sm-3 col-form-label">Nama Lengkap</label>
                     <div class="col-sm-9">
-                      <input name="name" type="name" class="form-control-plaintext" placeholder="Nama Lengkap" value="{{ Auth::user()->name }}" required>
+                      <input name="name" type="name" class="form-control" placeholder="Nama Lengkap" value="{{ Auth::user()->name }}" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -23,7 +33,8 @@
                 <div class="form-group row">
                     <label for="foto" class="col-sm-3 col-form-label">Foto</label>
                     <div class="col-sm-9">
-                      <input name="photo" type="file" class="form-control-file">
+                      <img src="{{ asset('img/profile/'. Auth::user()->photo) }}" alt="Photo error" style="height: 4rem">
+                      <input name="photo" type="file" class="form-control-file mt-2">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -37,31 +48,31 @@
                 <div class="form-group row">
                     <label for="twitter" class="col-sm-3 col-form-label">Twitter</label>
                     <div class="col-sm-9">
-                      <input name="twitter" type="twitter" class="form-control" placeholder="Link Twitter Profile" value="{{ old('twitter') }}">
+                      <input name="twitter" type="twitter" class="form-control" placeholder="Link Twitter Profile" value="{{ Auth::user()->medsos['twitter'] ?? null }}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="facebook" class="col-sm-3 col-form-label">Facebook</label>
                     <div class="col-sm-9">
-                      <input name="facebook" type="facebook" class="form-control" placeholder="Link Facebook Profile" value="{{ old('facebook') }}">
+                      <input name="facebook" type="facebook" class="form-control" placeholder="Link Facebook Profile" value="{{ Auth::user()->medsos['facebook'] ?? null }}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="instagram" class="col-sm-3 col-form-label">Instagram</label>
                     <div class="col-sm-9">
-                      <input name="instagram" type="instagram" class="form-control" placeholder="Link Instagram Profile" value="{{ old('instagram') }}">
+                      <input name="instagram" type="instagram" class="form-control" placeholder="Link Instagram Profile" value="{{ Auth::user()->medsos['instagram'] ?? null }}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="linkedin" class="col-sm-3 col-form-label">LinkedIn</label>
                     <div class="col-sm-9">
-                      <input name="linkedin" type="linkedin" class="form-control" placeholder="Link LinkedIn Profile" value="{{ old('linkedin') }}">
+                      <input name="linkedin" type="linkedin" class="form-control" placeholder="Link LinkedIn Profile" value="{{ Auth::user()->medsos['linkedin'] ?? null }}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="github" class="col-sm-3 col-form-label">GitHub</label>
                     <div class="col-sm-9">
-                      <input name="github" type="github" class="form-control" placeholder="Link GitHub Profile" value="{{ old('github') }}">
+                      <input name="github" type="github" class="form-control" placeholder="Link GitHub Profile" value="{{ Auth::user()->medsos['github'] ?? null }}">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
@@ -71,7 +82,9 @@
         <div class="card mt-3">
             <h5 class="card-header">Change Password</h5>
             <div class="card-body">
-              <form action="{{ url('admin/profile/password/'.Auth::user()->id) }}" method="POST">
+              <form action="{{ url('admin/profile/password/'. Auth::user()->id) }}" method="POST">
+                @method('PUT')
+                @csrf
                 <div class="form-group row">
                     <label for="old" class="col-sm-3 col-form-label">Password Lama</label>
                     <div class="col-sm-9">
