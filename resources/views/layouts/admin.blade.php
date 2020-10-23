@@ -51,8 +51,8 @@
           <li class="nav-item">
             <a href="{{ url('admin/image') }}" class="nav-link @if ($controller === 'ImageController') active @endif">Image</a>
           </li>
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" id="navMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name ?? 'User' }}</a>
+          <li class="nav-item dropdown ml-4">
+            <a href="#" class="nav-link" id="navMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('img/profile/'. Auth::user()->photo) }}" alt="Photo error" style="height: 1.7rem; width: 1.7rem; border-radius: 50%;"></a>
             <div class="dropdown-menu" aria-labelledby="navMenu">
               <a href="{{ url('admin/profile') }}" class="dropdown-item">Profile</a>
               <a href="{{ url('admin/logout') }}" class="dropdown-item">Logout</a>
