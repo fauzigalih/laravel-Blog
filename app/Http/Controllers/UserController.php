@@ -23,6 +23,8 @@ class UserController extends Controller
             // Authentication passed...
             return redirect()->intended('admin');
         }
+
+        return redirect('admin/login');
     }
 
     public function register()
@@ -37,7 +39,8 @@ class UserController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'photo' => 'user.png'
         ]);
         return redirect('admin');
     }
@@ -54,7 +57,41 @@ class UserController extends Controller
 
     public function profile()
     {
-        $model = new User();
         return view('backend.user.profile');
+    }
+
+    public function profileUpdate(Request $request, User $user)
+    {
+        $model = User::findOrFail($user->id);
+        User::validateProfile($request);
+        if ($request->photo == null) {
+            $fileName = $model->photo;
+        }else{
+            $fileName = 'img'.date('dmYHis').'.'.$request->photo->extension();
+            $request->photo->move(public_path('img/profile'), $fileName);
+        }
+
+        $medsos = json_encode([
+            'twitter' => $request->twitter,
+            'facebook' => $request->facebook,
+            'instagram' => $request->instagram,
+            'linkedin' => $request->linkedin,
+            'github' => $request->github
+        ]);
+
+        User::where('id', $model->id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'description' => $request->description,
+            'medsos' => $medsos,
+            'photo' => $fileName
+        ]);
+        
+        return redirect('admin/profile')->with('succes', 'Data berhasil diupdate');
+    }
+
+    public function passwordUpdate(Request $request, User $user)
+    {
+        $model = User::findOrFail($user->id);
     }
 }
