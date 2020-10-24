@@ -326,6 +326,7 @@ main .content .content-uploader img {
 
 main .content .content-uploader a {
     grid-area: name;
+    justify-self: start;
     color: black;
 }
 
@@ -467,6 +468,7 @@ main .content .content-uploader-detail p.written-by {
 
 main .content .content-uploader-detail a {
     grid-area: name;
+    justify-self: start;
     font-size: 1.4rem;
     font-weight: 500;
     text-decoration: none;
