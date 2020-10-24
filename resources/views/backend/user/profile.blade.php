@@ -2,6 +2,7 @@
 @section('title', 'Profile')
 @section('content')
     <main>
+      @include('layouts.alert')
       @if ($errors->any())
           <div class="alert alert-danger">
               <ul>
@@ -82,7 +83,7 @@
         <div class="card mt-3">
             <h5 class="card-header">Change Password</h5>
             <div class="card-body">
-              <form action="{{ url('admin/profile/password/'. Auth::user()->id) }}" method="POST">
+              <form action="{{ url('admin/password/'. Auth::user()->id) }}" method="POST">
                 @method('PUT')
                 @csrf
                 <div class="form-group row">
@@ -112,10 +113,35 @@
             <div class="card-body">
               <h5 class="card-title">Hapus akun secara permanen!</h5>
               <p class="card-text">Semua aktivitas akan hilang seperti postingan dan data lainnya ketika menghapus akun.</p>
-              <form action="{{ url('admin/profile/delete/'.Auth::user()->id) }}" method="POST">
-                <button type="submit" class="btn btn-danger">Hapus Akun</button>
-              </form>
+              <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteAccount">Hapus Akun</button>
             </div>
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="deleteAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Hapus Akun</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Yakin ingin menghapus akun ini secara permanen? <br>
+                Semua aktivitas akan hilang seperti postingan dan data lainnya ketika menghapus akun.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                <form action="{{ url('admin/profile/'. Auth::user()->id) }}" method="POST">
+                  @method('DELETE')
+                  @csrf
+                  <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Modal -->
     </main>
 @endsection
