@@ -17,8 +17,8 @@
                 <div class="content-card">
                   <p>{{ $data->title }}</p>
                   <div class="uploader">
-                    <img src="img/garuda.jpg" alt="">
-                    <p class="name">Fauzi Galih Aji Saputro</p>
+                    <img src="{{ asset('img/profile/'. $data->user->photo) }}" alt="Photo error">
+                    <p class="name">{{ $data->user->name }}</p>
                     <p class="date">{{ $data->created_at->format('M d, Y') }}</p>
                   </div>
                 </div>
@@ -37,8 +37,8 @@
                 <div class="content-card">
                   <p>{{ $data->title }}</p>
                   <div class="uploader">
-                    <img src="img/garuda.jpg" alt="">
-                    <p class="name">Fauzi Galih Aji Saputro</p>
+                    <img src="{{ asset('img/profile/'. $data->user->photo) }}" alt="Photo error">
+                    <p class="name">{{ $data->user->name }}</p>
                     <p class="date">{{ $data->created_at->format('M d, Y') }}</p>
                   </div>
                 </div>
@@ -57,8 +57,8 @@
                 <div class="content-card">
                   <p>{{ $data->title }}</p>
                   <div class="uploader">
-                    <img src="img/garuda.jpg" alt="">
-                    <p class="name">Fauzi Galih Aji Saputro</p>
+                    <img src="{{ asset('img/profile/'. $data->user->photo) }}" alt="Photo error">
+                    <p class="name">{{ $data->user->name }}</p>
                     <p class="date">{{ $data->created_at->format('M d, Y') }}</p>
                   </div>
                 </div>
