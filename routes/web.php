@@ -86,10 +86,11 @@ Route::get('admin/login', [UserController::class, 'login'])->name('login');
 Route::get('admin/register', [UserController::class, 'register']);
 Route::post('admin/register', [UserController::class, 'store']);
 Route::post('admin/login', [UserController::class, 'authenticate']);
-Route::get('admin/logout', [UserController::class, 'logout']);
-Route::get('admin/profile', [UserController::class, 'profile']);
-Route::put('admin/profile/{user}', [UserController::class, 'profileUpdate']);
-Route::put('admin/password/{user}', [UserController::class, 'passwordUpdate']);
+Route::get('admin/logout', [UserController::class, 'logout'])->middleware('auth');
+Route::get('admin/profile', [UserController::class, 'profile'])->middleware('auth');
+Route::put('admin/profile/{user}', [UserController::class, 'profileUpdate'])->middleware('auth');
+Route::put('admin/password/{user}', [UserController::class, 'passwordUpdate'])->middleware('auth');
+Route::delete('admin/profile/{user}', [UserController::class, 'destroy']);
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('dashboard');
