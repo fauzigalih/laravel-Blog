@@ -18,12 +18,13 @@ class Post extends Model
         'thumbnail',
         'uploader',
         'url',
-        'status'
+        'status',
+        'view'
     ];
 
     public static function validateData(Request $request)
     {
-        $request->validate([
+        return $request->validate([
             'title' => 'required|string',
             'article' => 'required',
             'category' => 'string',
@@ -31,7 +32,13 @@ class Post extends Model
             'thumbnail' => 'required|string',
             'uploader' => 'integer',
             'url' => 'string',
-            'status' =>'required|integer'
+            'status' =>'required|integer',
+            'view' => 'integer'
         ]);
+    }
+
+    public function user()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'uploader');
     }
 }
