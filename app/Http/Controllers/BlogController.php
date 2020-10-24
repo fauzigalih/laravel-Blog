@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -14,13 +15,13 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $model = Post::where('category', 'blog')->get();
+        $model = Post::where('category', 'blog')->orderBy('created_at', 'desc')->get();
         return view('frontend.post.index', compact('model'));
     }
 
     public function admin()
     {
-        $model = Post::where('category', 'blog')->get();
+        $model = Post::where('category', 'blog')->where('uploader', Auth::user()->id)->get();
         return view('backend.post.index', compact('model'));
     }
 
@@ -52,11 +53,12 @@ class BlogController extends Controller
             'category' => $request->category,
             'tag' => $request->tag,
             'thumbnail' => $thumbnail,
-            'uploader' => 1,
+            'uploader' => Auth::user()->id,
             'url' => $count === 0 ? $url : $url.$count,
-            'status' => $request->status
+            'status' => $request->status,
+            'view' => 0
         ]);
-        return redirect('admin/blog')->with('success', 'Tag Berhasil Ditambahkan!');
+        return redirect('admin/blog')->with('success', 'Blog was created successfully');
     }
 
     /**
@@ -111,7 +113,7 @@ class BlogController extends Controller
             'thumbnail' => $thumbnail,
             'status' => $request->status
         ]);
-        return redirect('admin/blog')->with('warning', 'Data Berhasil Diubah!');
+        return redirect('admin/blog')->with('success', 'Blog updated successfully');
     }
 
     /**
@@ -123,6 +125,6 @@ class BlogController extends Controller
     public function destroy(Post $post)
     {
         Post::destroy($post->id);
-        return redirect('admin/blog')->with('danger', 'Data Berhasil Dihapus!');
+        return redirect('admin/blog')->with('danger', 'Blog deleted successfully');
     }
 }
