@@ -3,6 +3,7 @@
 @section('content')
 <main class="auth">
     <h1>Login</h1>
+    @include('layouts.alert')
     @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
