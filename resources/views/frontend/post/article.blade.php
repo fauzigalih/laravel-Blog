@@ -6,15 +6,15 @@
       <div class="content-header">
         <div class="content-header-uploader">
           <div class="content-uploader">
-            <img src="{{ asset('img/garuda.jpg') }}" alt="">
-            <a href="">Fauzi Galih Aji Saputro</a>
+            <img src="{{ asset('img/profile/'. $model->user->photo) }}" alt="">
+            <a href="">{{ $model->user->name }}</a>
             <p class="content-update">{{ $model->created_at->format('M d, Y') }}</p>
             <div class="content-uploader-media">
-              <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
-              <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
-              <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
-              <a href=""><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-              <a href=""><i class="fa fa-github" aria-hidden="true"></i></a>
+              <a href="{{ $model->user->medsos['twitter'] ?? '#' }}"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="{{ $model->user->medsos['facebook'] ?? '#' }}"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a href="{{ $model->user->medsos['instagram'] ?? '#' }}"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+              <a href="{{ $model->user->medsos['linkedin'] ?? '#' }}"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+              <a href="{{ $model->user->medsos['github'] ?? '#' }}"><i class="fa fa-github" aria-hidden="true"></i></a>
             </div>
           </div>
         </div>
@@ -47,18 +47,16 @@
           advertisement 580 x 400
         </div>
         <div class="content-uploader-detail">
-          <img src="img/garuda.jpg" alt="">
+          <img src="{{ asset('img/profile/'. $model->user->photo) }}" alt="">
           <p class="written-by">Written By</p>
-          <a href="">Fauzi Galih Aji Saputro</a>
-          <p class="quotes-uploader">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit quisquam praesentium
-            at libero modi, possimus corrupti quo dignissimos, eligendi minus suscipit nisi perferendis. Possimus natus
-            quia nam sunt, rerum deleniti.</p>
+          <a href="">{{ $model->user->name }}</a>
+          <p class="quotes-uploader">{{ $model->user->description }}</p>
           <div class="content-uploader-media">
-            <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
-            <a href=""><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a href=""><i class="fa fa-github" aria-hidden="true"></i></a>
+            <a href="{{ $model->user->medsos['twitter'] ?? '#' }}"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="{{ $model->user->medsos['facebook'] ?? '#' }}"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a href="{{ $model->user->medsos['instagram'] ?? '#' }}"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            <a href="{{ $model->user->medsos['linkedin'] ?? '#' }}"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a href="{{ $model->user->medsos['github'] ?? '#' }}"><i class="fa fa-github" aria-hidden="true"></i></a>
           </div>
         </div>
       </div>
