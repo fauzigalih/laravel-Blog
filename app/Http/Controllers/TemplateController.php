@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TemplateController extends Controller
 {
@@ -14,13 +15,13 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        $model = Post::where('category', 'template')->get();
+        $model = Post::where('category', 'template')->orderBy('created_at', 'desc')->get();
         return view('frontend.post.index', compact('model'));
     }
 
     public function admin()
     {
-        $model = Post::where('category', 'template')->get();
+        $model = Post::where('category', 'template')->where('uploader', Auth::user()->id)->get();
         return view('backend.post.index', compact('model'));
     }
 
@@ -52,11 +53,11 @@ class TemplateController extends Controller
             'category' => $request->category,
             'tag' => $request->tag,
             'thumbnail' => $thumbnail,
-            'uploader' => 1,
+            'uploader' => Auth::user()->id,
             'url' => $count === 0 ? $url : $url.$count,
             'status' => $request->status
         ]);
-        return redirect('admin/template')->with('success', 'Tag Berhasil Ditambahkan!');
+        return redirect('admin/template')->with('success', 'Template was created successfully');
     }
 
     /**
@@ -111,7 +112,7 @@ class TemplateController extends Controller
             'thumbnail' => $thumbnail,
             'status' => $request->status
         ]);
-        return redirect('admin/template')->with('warning', 'Data Berhasil Diubah!');
+        return redirect('admin/template')->with('success', 'Template updated successfully');
     }
 
     /**
@@ -123,6 +124,6 @@ class TemplateController extends Controller
     public function destroy(Post $post)
     {
         Post::destroy($post->id);
-        return redirect('admin/template')->with('danger', 'Data Berhasil Dihapus!');
+        return redirect('admin/template')->with('danger', 'Project deleted successfully');
     }
 }
