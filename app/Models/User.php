@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class User extends Authenticatable
 {
@@ -59,20 +60,37 @@ class User extends Authenticatable
 
     public static function validateData(Request $request)
     {
-        $request->validate([
+        return $request->validate([
             'name' => 'required|string',
             'email' => 'required|unique:users,email|string',
             'password' => 'required|min:6|required_with:confirm|same:confirm',
-            'confirm' => 'required'
+            'confirm' => 'required|min:6'
+        ]);
+    }
+
+    public static function validateLogin(Request $request)
+    {
+        return $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|min:6'
         ]);
     }
     
     public static function validateProfile(Request $request)
     {
-        $request->validate([
+        return $request->validate([
             'name' => 'required|string',
             'email' => 'required|string',
             'description' => 'required|min:20|string',
+        ]);
+    }
+    
+    public static function validatePassword(Request $request)
+    {
+        return Validator::make($request->all(), [
+            'old' => 'required|min:6',
+            'password' => 'required|min:6|required_with:confirm|same:confirm',
+            'confirm' => 'required|min:6'
         ]);
     }
 }
