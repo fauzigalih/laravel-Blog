@@ -43,7 +43,7 @@
             <button type="button" class="btn btn-info list">List</button>
             <button type="button" class="btn btn-info delete">Delete All</button>
         </div>
-        <textarea name="article" class="form-control" rows="3" id="article" placeholder="Article" @if ($view) readonly @endif required>{{ ($view || $edit) ? $model->article : old('article') }}</textarea>
+        <textarea name="article" class="form-control" rows="8" id="article" placeholder="Article" @if ($view) readonly @endif required>{{ ($view || $edit) ? $model->article : old('article') }}</textarea>
     </div>
     <div class="form-group">
         <label for="tag">Tag</label>
