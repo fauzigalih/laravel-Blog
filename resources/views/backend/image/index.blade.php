@@ -2,6 +2,7 @@
 @section('title', 'Image')
 @section('content')
 <main>
+    @include('layouts.alert')
     <h1>Image</h1>
     <a class="btn btn-primary mb-3" href="{{ url('admin/image/create') }}" role="button">Create</a>
     <table class="table table-striped">
