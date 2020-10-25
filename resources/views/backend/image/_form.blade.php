@@ -41,7 +41,7 @@
       </div>
     <div class="form-group">
         <label for="reference">Reference URL</label>
-        <input name="reference" type="reference" class="form-control" id="reference" placeholder="Reference URL" required
+        <input name="reference" type="reference" class="form-control" id="reference" placeholder="Reference URL"
         @if ($view || $edit)
             value="{{ $model->reference }}"
             @if ($view)
