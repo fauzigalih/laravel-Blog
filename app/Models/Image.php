@@ -20,9 +20,8 @@ class Image extends Model
     public static function validateData(Request $request)
     {
         $store = Route::currentRouteName() == 'image.store';
-        $request->validate(array_merge([
+        return $request->validate(array_merge([
             'name' => 'required|string',
-            'reference' => 'string'
         ], $store ? ['image_url' => 'required|image'] : ['image_url' => 'image']));
     }
 }
