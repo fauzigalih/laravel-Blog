@@ -57,35 +57,35 @@
                         @method('GET')
                         <button class="btn btn-link p-0">edit</button>
                     </form>
-                    <button class="btn btn-link p-0" data-toggle="modal" data-target="#deletePost">delete</button>
+                    <button class="btn btn-link p-0" data-toggle="modal" data-target="#deletePost{{ $data->id }}">delete</button>
                 </td>
-            </tr>
 
-            <!-- Modal -->
-            <div class="modal fade" id="deletePost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Hapus Artikel {{ ucwords($control) }}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Yakin ingin menghapus artikel {{ $control }} ini secara permanen?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                            <form action="{{ url('admin/'.$control.'/'.$data->id) }}" method="POST">
-                                @method('DELETE')
-                                @csrf
-                                <button type="submit" class="btn btn-danger">Ya, Hapus</button>
-                            </form>
+                <!-- Modal -->
+                <div class="modal fade" id="deletePost{{ $data->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Hapus Artikel {{ ucwords($control) }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Yakin ingin menghapus artikel {{ $control }} ini secara permanen?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                <form action="{{ url('admin/'.$control.'/'.$data->id) }}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- End Modal -->
+                <!-- End Modal -->
+            </tr>
             @endforeach
         </tbody>
     </table>
