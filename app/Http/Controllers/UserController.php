@@ -93,7 +93,6 @@ class UserController extends Controller
         ]);
 
         if ($update) {
-            
             return redirect('admin/profile')->with('success', 'Profile has been updated successfully');
         }else{
             return redirect('admin/profile')->with('success', 'Profile failed to update');
