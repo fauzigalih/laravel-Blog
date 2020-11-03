@@ -102,6 +102,12 @@ class Post extends Model
         $blog = self::where('category', 'blog')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
         $project = self::where('category', 'project')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
         $template = self::where('category', 'template')->where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        
+        if (!Auth::check()) {
+            $model->view++;
+            $model->save();
+        }
+        
         return view('frontend.post.article', compact('model', 'blog', 'project', 'template'));
     }
 
