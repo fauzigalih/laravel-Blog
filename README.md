@@ -1,2 +1,1 @@
-# laravel-Blog
- 
+# Laravel Blog
